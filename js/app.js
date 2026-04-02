@@ -437,6 +437,99 @@ function showQuizResult(){
 function closeModal(){document.getElementById('modalOverlay').classList.remove('show');}
 document.getElementById('modalOverlay').addEventListener('click',function(e){if(e.target===this)closeModal();});
 
+// ===== STUDY TIMER =====
+let timerInterval = null;
+let timerSeconds = 0;
+let timerRunning = false;
+
+function toggleTimer() {
+  if (timerRunning) {
+    stopTimer();
+  } else {
+    startTimer();
+  }
+}
+
+function startTimer() {
+  timerRunning = true;
+  document.getElementById('timerStartBtn').textContent = 'Pause';
+  document.getElementById('timerStartBtn').classList.remove('btn-primary');
+  document.getElementById('timerStartBtn').classList.add('btn-success');
+  document.getElementById('timerDigits').classList.add('running');
+  timerInterval = setInterval(function() {
+    timerSeconds++;
+    updateTimerDisplay();
+    renderTodayTotal();
+  }, 1000);
+}
+
+function stopTimer() {
+  timerRunning = false;
+  clearInterval(timerInterval);
+  timerInterval = null;
+  document.getElementById('timerStartBtn').textContent = 'Start';
+  document.getElementById('timerStartBtn').classList.add('btn-primary');
+  document.getElementById('timerStartBtn').classList.remove('btn-success');
+  document.getElementById('timerDigits').classList.remove('running');
+  saveTimerToday();
+  timerSeconds = 0;
+  updateTimerDisplay();
+}
+
+function resetTimer() {
+  const wasRunning = timerRunning;
+  if (wasRunning) {
+    clearInterval(timerInterval);
+    timerInterval = null;
+    timerRunning = false;
+  }
+  // Save any accumulated time before resetting
+  saveTimerToday();
+  timerSeconds = 0;
+  updateTimerDisplay();
+  document.getElementById('timerStartBtn').textContent = 'Start';
+  document.getElementById('timerStartBtn').classList.add('btn-primary');
+  document.getElementById('timerStartBtn').classList.remove('btn-success');
+  document.getElementById('timerDigits').classList.remove('running');
+}
+
+function updateTimerDisplay() {
+  const h = Math.floor(timerSeconds / 3600);
+  const m = Math.floor((timerSeconds % 3600) / 60);
+  const s = timerSeconds % 60;
+  document.getElementById('timerDigits').textContent =
+    String(h).padStart(2, '0') + ':' + String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+}
+
+function saveTimerToday() {
+  if (timerSeconds === 0) return;
+  const today = getTodayKey();
+  const timerData = JSON.parse(localStorage.getItem('studyTimer') || '{}');
+  if (!timerData[today]) timerData[today] = 0;
+  timerData[today] += timerSeconds;
+  localStorage.setItem('studyTimer', JSON.stringify(timerData));
+  renderTodayTotal();
+}
+
+function renderTodayTotal() {
+  const timerData = JSON.parse(localStorage.getItem('studyTimer') || '{}');
+  const today = getTodayKey();
+  const totalSec = (timerData[today] || 0) + timerSeconds;
+  const h = Math.floor(totalSec / 3600);
+  const m = Math.floor((totalSec % 3600) / 60);
+  let display = '';
+  if (h > 0) display = h + 'h ' + m + 'min';
+  else display = m + ' min';
+  document.getElementById('timerTodayTotal').textContent = display;
+}
+
+// Save timer when leaving the page
+window.addEventListener('beforeunload', function() {
+  if (timerRunning && timerSeconds > 0) {
+    saveTimerToday();
+  }
+});
+
 // ===== NOTES =====
 function getNotes() {
   return JSON.parse(localStorage.getItem('learnerNotes') || '[]');
@@ -669,6 +762,7 @@ renderTopicChips();
 renderVocab();
 renderGrammar();
 renderDashboard();
+renderTodayTotal();
 updateNotesBadge();
 // Hide getting started if dismissed
 if(localStorage.getItem('gettingStartedDismissed')==='true'){

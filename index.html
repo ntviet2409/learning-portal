@@ -41,6 +41,23 @@
     <div class="dashboard-date" id="dashDate"></div>
   </div>
   <div class="dashboard-grid" id="dashGrid"></div>
+
+  <!-- Study Timer -->
+  <div class="timer-bar" id="timerBar">
+    <div class="timer-display">
+      <span class="timer-icon" id="timerIcon">&#9202;</span>
+      <span class="timer-digits" id="timerDigits">00:00:00</span>
+    </div>
+    <div class="timer-controls">
+      <button class="btn btn-sm btn-primary" id="timerStartBtn" onclick="toggleTimer()">Start</button>
+      <button class="btn btn-sm" onclick="resetTimer()">Reset</button>
+    </div>
+    <div class="timer-today-total">
+      <span style="font-size:0.78rem;color:var(--text-secondary);">Today total:</span>
+      <span style="font-size:0.85rem;font-weight:700;color:var(--primary);" id="timerTodayTotal">0 min</span>
+    </div>
+  </div>
+
   <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
     <div style="flex:1;min-width:200px;">
       <div style="display:flex;justify-content:space-between;font-size:0.85rem;color:var(--text-secondary);margin-bottom:2px;">

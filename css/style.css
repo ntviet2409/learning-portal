@@ -349,6 +349,26 @@ main { max-width: 1200px; margin: 0 auto; padding: 24px 20px; }
 .mobile-nav a:hover { background: var(--accent); }
 .hidden { display: none !important; }
 .topic-progress-label { font-size: 0.78rem; color: var(--text-secondary); display: flex; justify-content: space-between; }
+/* Study Timer */
+.timer-bar {
+  display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 12px 18px; margin-bottom: 16px;
+}
+.timer-display { display: flex; align-items: center; gap: 8px; }
+.timer-icon { font-size: 1.3rem; }
+.timer-digits {
+  font-size: 1.6rem; font-weight: 800; font-family: var(--font-mono);
+  color: var(--text); letter-spacing: 2px; min-width: 110px;
+}
+.timer-digits.running { color: var(--primary); }
+.timer-controls { display: flex; gap: 6px; }
+.timer-today-total { margin-left: auto; display: flex; align-items: center; gap: 6px; }
+@media (max-width: 480px) {
+  .timer-bar { gap: 10px; padding: 10px 14px; }
+  .timer-digits { font-size: 1.3rem; min-width: 90px; }
+  .timer-today-total { margin-left: 0; width: 100%; }
+}
 /* Notes */
 .notes-fab {
   position: fixed; bottom: 24px; right: 24px; z-index: 90;
