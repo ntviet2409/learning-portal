@@ -437,16 +437,121 @@ function showQuizResult(){
 function closeModal(){document.getElementById('modalOverlay').classList.remove('show');}
 document.getElementById('modalOverlay').addEventListener('click',function(e){if(e.target===this)closeModal();});
 
+// ===== NOTES =====
+function getNotes() {
+  return JSON.parse(localStorage.getItem('learnerNotes') || '[]');
+}
+
+function saveNotes(notes) {
+  localStorage.setItem('learnerNotes', JSON.stringify(notes));
+  updateNotesBadge();
+}
+
+function addNote() {
+  const input = document.getElementById('noteInput');
+  const text = input.value.trim();
+  if (!text) return;
+  const tag = document.getElementById('noteTagSelect').value;
+  const section = document.getElementById('noteSectionSelect').value;
+  const notes = getNotes();
+  notes.unshift({
+    id: Date.now(),
+    text: text,
+    tag: tag,
+    section: section,
+    date: new Date().toISOString(),
+    resolved: false
+  });
+  saveNotes(notes);
+  input.value = '';
+  renderNotes();
+}
+
+function deleteNote(id) {
+  let notes = getNotes();
+  notes = notes.filter(n => n.id !== id);
+  saveNotes(notes);
+  renderNotes();
+}
+
+function toggleNoteResolved(id) {
+  const notes = getNotes();
+  const note = notes.find(n => n.id === id);
+  if (note) note.resolved = !note.resolved;
+  saveNotes(notes);
+  renderNotes();
+}
+
+function renderNotes(filterTag) {
+  const notes = getNotes();
+  const list = document.getElementById('notesList');
+
+  // Filter bar
+  let html = '<div class="notes-filter">';
+  const tags = ['all', 'question', 'issue', 'tip', 'general'];
+  tags.forEach(t => {
+    const count = t === 'all' ? notes.length : notes.filter(n => n.tag === t).length;
+    const active = (filterTag || 'all') === t;
+    html += `<div class="chip ${active ? 'active' : ''}" onclick="renderNotes('${t}')" style="font-size:0.75rem;padding:3px 10px;">${t === 'all' ? 'All' : t.charAt(0).toUpperCase() + t.slice(1)} <span class="chip-count">${count}</span></div>`;
+  });
+  html += '</div>';
+
+  const filtered = (!filterTag || filterTag === 'all') ? notes : notes.filter(n => n.tag === filterTag);
+
+  if (filtered.length === 0) {
+    html += '<div class="notes-empty">No notes yet.<br><span style="font-size:0.82rem;">Add notes about words you find difficult, questions for your teacher, or tips you discover!</span><br><span style="font-size:0.78rem;color:var(--primary);">(Chưa có ghi chú. Thêm ghi chú về từ khó, câu hỏi cho giáo viên, hoặc mẹo bạn tìm được!)</span></div>';
+  } else {
+    filtered.forEach(n => {
+      const d = new Date(n.date);
+      const dateStr = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) + ' ' + d.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+      html += `<div class="note-item" style="${n.resolved ? 'opacity:0.5;' : ''}">
+        <div class="note-meta">
+          <div><span class="note-tag ${n.tag}">${n.tag}</span></div>
+          <span class="note-date">${dateStr}</span>
+        </div>
+        <div class="note-text" style="${n.resolved ? 'text-decoration:line-through;' : ''}">${n.text.replace(/</g,'&lt;').replace(/>/g,'&gt;')}</div>
+        ${n.section ? `<div class="note-section-ref">Section: ${n.section}</div>` : ''}
+        <div style="margin-top:4px;display:flex;gap:8px;">
+          <button class="btn btn-sm" style="font-size:0.7rem;padding:2px 8px;" onclick="toggleNoteResolved(${n.id})">${n.resolved ? 'Reopen' : 'Resolve'}</button>
+          <button class="note-delete" onclick="if(confirm('Delete this note?'))deleteNote(${n.id})">&#128465;</button>
+        </div>
+      </div>`;
+    });
+  }
+  list.innerHTML = html;
+}
+
+function toggleNotesPanel() {
+  const panel = document.getElementById('notesPanel');
+  panel.classList.toggle('open');
+  if (panel.classList.contains('open')) {
+    renderNotes();
+  }
+}
+
+function updateNotesBadge() {
+  const notes = getNotes();
+  const unresolved = notes.filter(n => !n.resolved).length;
+  const badge = document.getElementById('notesBadge');
+  if (unresolved > 0) {
+    badge.textContent = unresolved > 99 ? '99+' : unresolved;
+    badge.style.display = 'flex';
+  } else {
+    badge.style.display = 'none';
+  }
+}
+
 // ===== EXPORT / IMPORT =====
 function exportProgress() {
   const data = {
-    version: 1,
+    version: 2,
     exportedAt: new Date().toISOString(),
     learnedWords: JSON.parse(localStorage.getItem('learnedWords') || '{}'),
     dailyLearning: JSON.parse(localStorage.getItem('dailyLearning') || '{}'),
     dailyTarget: localStorage.getItem('dailyTarget') || '10',
     theme: localStorage.getItem('theme') || 'light',
-    gettingStartedDismissed: localStorage.getItem('gettingStartedDismissed') || 'false'
+    gettingStartedDismissed: localStorage.getItem('gettingStartedDismissed') || 'false',
+    notes: getNotes()
   };
   const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
@@ -510,14 +615,31 @@ function importProgress(event) {
         localStorage.setItem('gettingStartedDismissed', data.gettingStartedDismissed);
       }
 
+      // Import notes
+      if (data.notes && Array.isArray(data.notes)) {
+        if (doMerge) {
+          const currentNotes = getNotes();
+          const currentIds = new Set(currentNotes.map(n => n.id));
+          data.notes.forEach(n => {
+            if (!currentIds.has(n.id)) currentNotes.push(n);
+          });
+          currentNotes.sort((a, b) => new Date(b.date) - new Date(a.date));
+          saveNotes(currentNotes);
+        } else {
+          saveNotes(data.notes);
+        }
+      }
+
       // Re-render everything
       renderVocabStats();
       renderTopicChips();
       renderVocab();
       renderDashboard();
+      updateNotesBadge();
 
       const totalImported = Object.keys(learnedWords).length;
-      alert('Imported successfully! ' + totalImported + ' words marked as learned.');
+      const notesCount = (data.notes || []).length;
+      alert('Imported successfully!\n' + totalImported + ' words marked as learned.\n' + notesCount + ' notes imported.');
     } catch (err) {
       alert('Error importing file: ' + err.message + '\n\nMake sure you selected a valid English Hub progress file.');
     }
@@ -547,6 +669,7 @@ renderTopicChips();
 renderVocab();
 renderGrammar();
 renderDashboard();
+updateNotesBadge();
 // Hide getting started if dismissed
 if(localStorage.getItem('gettingStartedDismissed')==='true'){
   document.getElementById('gettingStarted').style.display='none';
