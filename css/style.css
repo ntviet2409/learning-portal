@@ -321,19 +321,116 @@ main { max-width: 1200px; margin: 0 auto; padding: 24px 20px; }
 .today-words-section { margin-top: 16px; }
 .today-label { font-size: 0.9rem; font-weight: 600; color: var(--primary-dark); margin-bottom: 8px; }
 /* Mobile */
-@media (max-width: 768px) {
-  nav { padding: 0 12px; }
-  .nav-brand { font-size: 0.95rem; }
-  .nav-links a { padding: 6px 8px; font-size: 0.8rem; }
-  main { padding: 16px 12px; }
-  .section-title { font-size: 1.4rem; }
-  .ipa-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
-  .vocab-grid { grid-template-columns: 1fr; }
-  .minimal-pairs { grid-template-columns: 1fr; }
-}
-@media (max-width: 480px) {
+/* Tablet — iPad 11" (820px) and similar */
+@media (max-width: 880px) {
   .nav-links { display: none; }
   .mobile-menu-btn { display: block !important; }
+  main { padding: 20px 16px; }
+  .section-title { font-size: 1.5rem; }
+  .dashboard-grid { grid-template-columns: repeat(2, 1fr); }
+  .ipa-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+  .vocab-grid { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+  .minimal-pairs { grid-template-columns: 1fr; }
+  .formula-box { font-size: 0.82rem; overflow-x: auto; }
+  .formula-box code { word-break: break-word; }
+}
+/* Phone — iPhone 17 Pro (393px) and similar */
+@media (max-width: 480px) {
+  nav { padding: 0 10px; height: 50px; }
+  .nav-brand { font-size: 0.9rem; }
+  main { padding: 12px 10px; }
+  .section { margin-bottom: 32px; }
+  .section-title { font-size: 1.25rem; gap: 6px; }
+  .section-subtitle { font-size: 0.88rem; margin-bottom: 16px; }
+  /* Dashboard */
+  .dashboard { padding: 16px 14px; margin-bottom: 20px; }
+  .dashboard-title { font-size: 1.1rem; }
+  .dashboard-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .dash-card { padding: 12px 8px; }
+  .dash-card-value { font-size: 1.5rem; }
+  .dash-card-label { font-size: 0.72rem; }
+  .dash-card-sub { font-size: 0.68rem; }
+  /* Timer */
+  .timer-bar { gap: 8px; padding: 10px 12px; flex-direction: column; align-items: stretch; }
+  .timer-display { justify-content: center; }
+  .timer-digits { font-size: 1.4rem; min-width: auto; text-align: center; }
+  .timer-controls { justify-content: center; }
+  .timer-today-total { margin-left: 0; justify-content: center; }
+  /* Getting started */
+  .getting-started { padding: 14px 12px; margin-bottom: 20px; }
+  .getting-started h3 { font-size: 1rem; }
+  .getting-started ol { padding-left: 16px; }
+  .getting-started li { font-size: 0.82rem; }
+  .welcome-msg { font-size: 0.85rem; }
+  /* IPA */
+  .ipa-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 8px; }
+  .ipa-card { padding: 10px 8px; }
+  .ipa-symbol { font-size: 1.5rem; }
+  .ipa-word { font-size: 0.85rem; }
+  .ipa-desc { font-size: 0.72rem; }
+  .ipa-vn { font-size: 0.72rem; }
+  .ipa-section-label { font-size: 1rem; margin: 14px 0 8px; }
+  .speak-btn { width: 26px; height: 26px; font-size: 1rem; }
+  /* Common Mistakes cards */
+  .card { padding: 14px 12px; }
+  .mistake-box { padding: 8px 10px; font-size: 0.82rem; }
+  .vietnamese-box { padding: 10px 12px; font-size: 0.82rem; }
+  .tip-box { padding: 10px 12px; font-size: 0.82rem; }
+  /* Vocab */
+  .vocab-controls { gap: 8px; margin-bottom: 12px; }
+  .search-box { min-width: 100%; font-size: 16px; /* prevent iOS zoom */ }
+  .topic-chips { gap: 4px; margin-bottom: 12px; }
+  .chip { padding: 4px 10px; font-size: 0.72rem; }
+  .vocab-grid { grid-template-columns: 1fr; gap: 8px; }
+  .word-card { padding: 12px 10px; }
+  .word-term { font-size: 0.95rem; }
+  .word-ipa { font-size: 0.78rem; }
+  .word-def { font-size: 0.82rem; }
+  .word-vn { font-size: 0.78rem; }
+  .word-ex { font-size: 0.78rem; }
+  /* Grammar */
+  .grammar-header { padding: 12px 14px; font-size: 0.9rem; }
+  .grammar-content { padding: 14px 12px; }
+  .grammar-content h4 { font-size: 0.88rem; }
+  .formula-box { padding: 8px 10px; font-size: 0.8rem; overflow-x: auto; }
+  .formula-box code { font-size: 0.78rem; word-break: break-word; }
+  .example-list li { font-size: 0.82rem; }
+  .tense-timeline { padding: 10px; }
+  /* ChatGPT Guide */
+  .formula-box code { display: block; white-space: pre-wrap; }
+  /* Stats */
+  .stats-bar { gap: 10px; padding: 10px 12px; font-size: 0.82rem; flex-direction: column; }
+  /* Target setting */
+  .target-setting { width: 100%; justify-content: center; }
+  /* Buttons */
+  .daily-words-btn { width: 100%; justify-content: center; }
+  /* Heatmap */
+  .heatmap { justify-content: center; }
+  .heatmap-day { width: 12px; height: 12px; }
+  /* Modal */
+  .modal { padding: 20px 16px; width: 95%; }
+  .flashcard-word { font-size: 1.5rem; }
+  .flashcard-ipa { font-size: 0.95rem; }
+  .flashcard-counter { font-size: 0.78rem; }
+  .quiz-option { padding: 10px 12px; font-size: 0.88rem; }
+  /* Progress bars */
+  .progress-bar-container { height: 5px; }
+  .daily-progress-bar { height: 8px; }
+  /* Notes panel */
+  .notes-panel { width: 100vw; height: 80vh; border-radius: var(--radius-lg) var(--radius-lg) 0 0; }
+  .notes-fab { bottom: 16px; right: 16px; width: 46px; height: 46px; font-size: 1.2rem; }
+}
+/* Prevent iOS input zoom (font-size must be >= 16px) */
+@media (max-width: 480px) {
+  input[type="text"], input[type="number"], textarea, select {
+    font-size: 16px !important;
+  }
+}
+/* Safe area for notched phones (iPhone 17 Pro) */
+@supports (padding: env(safe-area-inset-bottom)) {
+  .notes-fab { bottom: calc(16px + env(safe-area-inset-bottom)); }
+  .notes-panel { padding-bottom: env(safe-area-inset-bottom); }
+  nav { padding-left: max(10px, env(safe-area-inset-left)); padding-right: max(10px, env(safe-area-inset-right)); }
 }
 .mobile-menu-btn { display: none; background: none; border: none; font-size: 1.3rem; cursor: pointer; color: var(--text); }
 .mobile-nav {
@@ -364,11 +461,6 @@ main { max-width: 1200px; margin: 0 auto; padding: 24px 20px; }
 .timer-digits.running { color: var(--primary); }
 .timer-controls { display: flex; gap: 6px; }
 .timer-today-total { margin-left: auto; display: flex; align-items: center; gap: 6px; }
-@media (max-width: 480px) {
-  .timer-bar { gap: 10px; padding: 10px 14px; }
-  .timer-digits { font-size: 1.3rem; min-width: 90px; }
-  .timer-today-total { margin-left: 0; width: 100%; }
-}
 /* Notes */
 .notes-fab {
   position: fixed; bottom: 24px; right: 24px; z-index: 90;
@@ -445,8 +537,4 @@ main { max-width: 1200px; margin: 0 auto; padding: 24px 20px; }
 .notes-empty {
   text-align: center; color: var(--text-secondary); padding: 40px 20px;
   font-size: 0.9rem;
-}
-@media (max-width: 480px) {
-  .notes-panel { width: 100vw; height: 80vh; }
-  .notes-fab { bottom: 16px; right: 16px; width: 46px; height: 46px; font-size: 1.2rem; }
 }
