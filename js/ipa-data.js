@@ -1,60 +1,60 @@
 // ===== IPA DATA =====
 const ipaData = {
 shortVowels: [
-  {s:"/ɪ/",w:"ship",d:"Short, relaxed 'i'; tongue slightly lower than 'ee'",vn:"Gần giống 'i' ngắn trong 'đi'"},
-  {s:"/e/",w:"bed",d:"Tongue mid-front; mouth slightly open",vn:"Giống 'e' trong 'xe'"},
-  {s:"/ae/",w:"cat",d:"Mouth wide open; tongue low and front",vn:"Giữa 'a' và 'e'; không có trong tiếng Việt"},
-  {s:"/ʌ/",w:"cup",d:"Short, central vowel; mouth slightly open",vn:"Gần giống 'ơ' ngắn trong 'bơ'"},
-  {s:"/ɒ/",w:"hot",d:"Rounded lips; tongue low and back (British)",vn:"Giống 'o' trong 'bò'"},
-  {s:"/ʊ/",w:"book",d:"Short, relaxed 'oo'; lips slightly rounded",vn:"Gần giống 'u' ngắn trong 'tu'"},
-  {s:"/ə/",w:"about",d:"The 'schwa'; neutral, unstressed sound",vn:"Giống 'ơ' nhẹ, không nhấn; rất phổ biến"},
+  {s:"/ɪ/",w:"ship",p:"ih",d:"Short, relaxed 'i'; tongue slightly lower than 'ee'",vn:"Gần giống 'i' ngắn trong 'đi'"},
+  {s:"/e/",w:"bed",p:"eh",d:"Tongue mid-front; mouth slightly open",vn:"Giống 'e' trong 'xe'"},
+  {s:"/ae/",w:"cat",p:"aah",d:"Mouth wide open; tongue low and front",vn:"Giữa 'a' và 'e'; không có trong tiếng Việt"},
+  {s:"/ʌ/",w:"cup",p:"uh",d:"Short, central vowel; mouth slightly open",vn:"Gần giống 'ơ' ngắn trong 'bơ'"},
+  {s:"/ɒ/",w:"hot",p:"ah",d:"Rounded lips; tongue low and back (British)",vn:"Giống 'o' trong 'bò'"},
+  {s:"/ʊ/",w:"book",p:"oo",d:"Short, relaxed 'oo'; lips slightly rounded",vn:"Gần giống 'u' ngắn trong 'tu'"},
+  {s:"/ə/",w:"about",p:"uh",d:"The 'schwa'; neutral, unstressed sound",vn:"Giống 'ơ' nhẹ, không nhấn; rất phổ biến"},
 ],
 longVowels: [
-  {s:"/iː/",w:"sheep",d:"Long 'ee'; tongue high and front, lips spread",vn:"Giống 'i' dài trong 'đi' nhưng kéo dài hơn"},
-  {s:"/ɑː/",w:"car",d:"Long 'ah'; mouth wide open, tongue low and back",vn:"Giống 'a' dài trong 'ba'"},
-  {s:"/ɔː/",w:"door",d:"Long 'aw'; lips rounded, tongue mid-back",vn:"Giống 'o' dài trong 'bò' nhưng kéo dài"},
-  {s:"/uː/",w:"blue",d:"Long 'oo'; lips tightly rounded, tongue high and back",vn:"Giống 'u' dài trong 'mù'"},
-  {s:"/ɜː/",w:"bird",d:"Long central vowel; tongue mid-central, lips neutral",vn:"Giống 'ơ' dài; không có chính xác trong tiếng Việt"},
+  {s:"/iː/",w:"sheep",p:"eee",d:"Long 'ee'; tongue high and front, lips spread",vn:"Giống 'i' dài trong 'đi' nhưng kéo dài hơn"},
+  {s:"/ɑː/",w:"car",p:"ahhh",d:"Long 'ah'; mouth wide open, tongue low and back",vn:"Giống 'a' dài trong 'ba'"},
+  {s:"/ɔː/",w:"door",p:"aww",d:"Long 'aw'; lips rounded, tongue mid-back",vn:"Giống 'o' dài trong 'bò' nhưng kéo dài"},
+  {s:"/uː/",w:"blue",p:"ooo",d:"Long 'oo'; lips tightly rounded, tongue high and back",vn:"Giống 'u' dài trong 'mù'"},
+  {s:"/ɜː/",w:"bird",p:"err",d:"Long central vowel; tongue mid-central, lips neutral",vn:"Giống 'ơ' dài; không có chính xác trong tiếng Việt"},
 ],
 diphthongs: [
-  {s:"/eɪ/",w:"face",d:"Glides from 'e' to 'i'; as in 'day'",vn:"Giống 'ây' trong 'cây'"},
-  {s:"/aɪ/",w:"price",d:"Glides from open 'a' to 'i'; as in 'my'",vn:"Giống 'ai' trong 'hai'"},
-  {s:"/ɔɪ/",w:"choice",d:"Glides from 'aw' to 'i'; as in 'boy'",vn:"Giống 'oi' trong 'bồi'"},
-  {s:"/aʊ/",w:"mouth",d:"Glides from open 'a' to 'oo'; as in 'cow'",vn:"Giống 'ao' trong 'cao'"},
-  {s:"/əʊ/",w:"goat",d:"Glides from schwa to 'oo'; as in 'no'",vn:"Giống 'âu' trong 'câu'"},
-  {s:"/ɪə/",w:"near",d:"Glides from 'i' to schwa; as in 'here'",vn:"Giống 'ia' trong 'mía'"},
-  {s:"/eə/",w:"square",d:"Glides from 'e' to schwa; as in 'air'",vn:"Gần giống 'e-ơ'; không có trong tiếng Việt"},
-  {s:"/ʊə/",w:"cure",d:"Glides from 'oo' to schwa; as in 'tour'",vn:"Gần giống 'ua' trong 'mua'"},
+  {s:"/eɪ/",w:"face",p:"ay",d:"Glides from 'e' to 'i'; as in 'day'",vn:"Giống 'ây' trong 'cây'"},
+  {s:"/aɪ/",w:"price",p:"eye",d:"Glides from open 'a' to 'i'; as in 'my'",vn:"Giống 'ai' trong 'hai'"},
+  {s:"/ɔɪ/",w:"choice",p:"oy",d:"Glides from 'aw' to 'i'; as in 'boy'",vn:"Giống 'oi' trong 'bồi'"},
+  {s:"/aʊ/",w:"mouth",p:"ow",d:"Glides from open 'a' to 'oo'; as in 'cow'",vn:"Giống 'ao' trong 'cao'"},
+  {s:"/əʊ/",w:"goat",p:"oh",d:"Glides from schwa to 'oo'; as in 'no'",vn:"Giống 'âu' trong 'câu'"},
+  {s:"/ɪə/",w:"near",p:"ear",d:"Glides from 'i' to schwa; as in 'here'",vn:"Giống 'ia' trong 'mía'"},
+  {s:"/eə/",w:"square",p:"air",d:"Glides from 'e' to schwa; as in 'air'",vn:"Gần giống 'e-ơ'; không có trong tiếng Việt"},
+  {s:"/ʊə/",w:"cure",p:"oor",d:"Glides from 'oo' to schwa; as in 'tour'",vn:"Gần giống 'ua' trong 'mua'"},
 ],
 voicelessCons: [
-  {s:"/p/",w:"pen",d:"Lips together, released with a puff of air",vn:"Giống 'p' trong 'pin'; bật hơi mạnh hơn"},
-  {s:"/t/",w:"ten",d:"Tongue tip touches ridge behind upper teeth",vn:"Giống 't' trong 'tin'; đầu lưỡi chạm lợi"},
-  {s:"/k/",w:"cat",d:"Back of tongue touches soft palate",vn:"Giống 'c/k' trong 'cá'"},
-  {s:"/f/",w:"fan",d:"Upper teeth touch lower lip; air flows through",vn:"Giống 'ph' trong 'phố'"},
-  {s:"/θ/",w:"think",d:"Tongue tip between teeth; air flows over tongue",vn:"Đặt lưỡi giữa hai hàm răng; không có trong tiếng Việt"},
-  {s:"/s/",w:"see",d:"Tongue near ridge; hissing air through narrow gap",vn:"Giống 's' trong 'sáu'"},
-  {s:"/ʃ/",w:"she",d:"Tongue raised, lips slightly rounded; 'sh' sound",vn:"Gần giống 'x' trong 'xin' nhưng tròn môi hơn"},
-  {s:"/tʃ/",w:"church",d:"Starts like /t/ then releases to /ʃ/; 'ch' sound",vn:"Giống 'ch' trong 'chào'"},
-  {s:"/h/",w:"hat",d:"Glottis open; gentle breath of air",vn:"Giống 'h' trong 'hoa'"},
+  {s:"/p/",w:"pen",p:"puh",d:"Lips together, released with a puff of air",vn:"Giống 'p' trong 'pin'; bật hơi mạnh hơn"},
+  {s:"/t/",w:"ten",p:"tuh",d:"Tongue tip touches ridge behind upper teeth",vn:"Giống 't' trong 'tin'; đầu lưỡi chạm lợi"},
+  {s:"/k/",w:"cat",p:"kuh",d:"Back of tongue touches soft palate",vn:"Giống 'c/k' trong 'cá'"},
+  {s:"/f/",w:"fan",p:"fff",d:"Upper teeth touch lower lip; air flows through",vn:"Giống 'ph' trong 'phố'"},
+  {s:"/θ/",w:"think",p:"thh",d:"Tongue tip between teeth; air flows over tongue",vn:"Đặt lưỡi giữa hai hàm răng; không có trong tiếng Việt"},
+  {s:"/s/",w:"see",p:"sss",d:"Tongue near ridge; hissing air through narrow gap",vn:"Giống 's' trong 'sáu'"},
+  {s:"/ʃ/",w:"she",p:"shh",d:"Tongue raised, lips slightly rounded; 'sh' sound",vn:"Gần giống 'x' trong 'xin' nhưng tròn môi hơn"},
+  {s:"/tʃ/",w:"church",p:"chuh",d:"Starts like /t/ then releases to /ʃ/; 'ch' sound",vn:"Giống 'ch' trong 'chào'"},
+  {s:"/h/",w:"hat",p:"huh",d:"Glottis open; gentle breath of air",vn:"Giống 'h' trong 'hoa'"},
 ],
 voicedCons: [
-  {s:"/b/",w:"bag",d:"Like /p/ but vocal cords vibrate",vn:"Giống 'b' trong 'ba'"},
-  {s:"/d/",w:"dog",d:"Like /t/ but vocal cords vibrate",vn:"Giống 'đ' trong 'đi'"},
-  {s:"/ɡ/",w:"go",d:"Like /k/ but vocal cords vibrate",vn:"Giống 'g' trong 'gà'"},
-  {s:"/v/",w:"van",d:"Like /f/ but vocal cords vibrate",vn:"Giống 'v' trong 'và'"},
-  {s:"/ð/",w:"this",d:"Like /θ/ but vocal cords vibrate",vn:"Giống /θ/ nhưng rung dây thanh; không có trong tiếng Việt"},
-  {s:"/z/",w:"zoo",d:"Like /s/ but vocal cords vibrate",vn:"Giống 'd/gi' trong 'da/gia' (miền Bắc)"},
-  {s:"/ʒ/",w:"vision",d:"Like /ʃ/ but vocal cords vibrate",vn:"Gần giống 'gi' nhưng tròn môi; hiếm trong tiếng Việt"},
-  {s:"/dʒ/",w:"judge",d:"Like /tʃ/ but vocal cords vibrate; 'j' sound",vn:"Gần giống 'tr' trong 'trời' (miền Nam)"},
+  {s:"/b/",w:"bag",p:"buh",d:"Like /p/ but vocal cords vibrate",vn:"Giống 'b' trong 'ba'"},
+  {s:"/d/",w:"dog",p:"duh",d:"Like /t/ but vocal cords vibrate",vn:"Giống 'đ' trong 'đi'"},
+  {s:"/ɡ/",w:"go",p:"guh",d:"Like /k/ but vocal cords vibrate",vn:"Giống 'g' trong 'gà'"},
+  {s:"/v/",w:"van",p:"vvv",d:"Like /f/ but vocal cords vibrate",vn:"Giống 'v' trong 'và'"},
+  {s:"/ð/",w:"this",p:"thh",d:"Like /θ/ but vocal cords vibrate",vn:"Giống /θ/ nhưng rung dây thanh; không có trong tiếng Việt"},
+  {s:"/z/",w:"zoo",p:"zzz",d:"Like /s/ but vocal cords vibrate",vn:"Giống 'd/gi' trong 'da/gia' (miền Bắc)"},
+  {s:"/ʒ/",w:"vision",p:"zhh",d:"Like /ʃ/ but vocal cords vibrate",vn:"Gần giống 'gi' nhưng tròn môi; hiếm trong tiếng Việt"},
+  {s:"/dʒ/",w:"judge",p:"juh",d:"Like /tʃ/ but vocal cords vibrate; 'j' sound",vn:"Gần giống 'tr' trong 'trời' (miền Nam)"},
 ],
 nasals: [
-  {s:"/m/",w:"man",d:"Lips closed; air flows through nose",vn:"Giống 'm' trong 'mẹ'"},
-  {s:"/n/",w:"no",d:"Tongue tip on ridge; air flows through nose",vn:"Giống 'n' trong 'nó'"},
-  {s:"/ŋ/",w:"sing",d:"Back of tongue on soft palate; air through nose",vn:"Giống 'ng' trong 'ngày'"},
-  {s:"/l/",w:"leg",d:"Tongue tip on ridge; air flows around sides",vn:"Giống 'l' trong 'là'"},
-  {s:"/r/",w:"red",d:"Tongue curled back, not touching roof of mouth",vn:"Uốn lưỡi; khác 'r' tiếng Việt"},
-  {s:"/w/",w:"wet",d:"Lips rounded; glide to the next vowel",vn:"Giống 'qu' trong 'qua' (phần 'u')"},
-  {s:"/j/",w:"yes",d:"Tongue high and front; glide to next vowel",vn:"Giống 'y/d' trong 'yêu/diêu'"},
+  {s:"/m/",w:"man",p:"mmm",d:"Lips closed; air flows through nose",vn:"Giống 'm' trong 'mẹ'"},
+  {s:"/n/",w:"no",p:"nnn",d:"Tongue tip on ridge; air flows through nose",vn:"Giống 'n' trong 'nó'"},
+  {s:"/ŋ/",w:"sing",p:"ng",d:"Back of tongue on soft palate; air through nose",vn:"Giống 'ng' trong 'ngày'"},
+  {s:"/l/",w:"leg",p:"lll",d:"Tongue tip on ridge; air flows around sides",vn:"Giống 'l' trong 'là'"},
+  {s:"/r/",w:"red",p:"rrr",d:"Tongue curled back, not touching roof of mouth",vn:"Uốn lưỡi; khác 'r' tiếng Việt"},
+  {s:"/w/",w:"wet",p:"wuh",d:"Lips rounded; glide to the next vowel",vn:"Giống 'qu' trong 'qua' (phần 'u')"},
+  {s:"/j/",w:"yes",p:"yuh",d:"Tongue high and front; glide to next vowel",vn:"Giống 'y/d' trong 'yêu/diêu'"},
 ],
 minimalPairs: [
   {a:"ship /ʃɪp/",b:"sheep /ʃiːp/",diff:"/ɪ/ vs /iː/"},
@@ -92,7 +92,11 @@ if ('speechSynthesis' in window) {
 function renderIPA(){
   const render=(id,arr)=>{
     document.getElementById(id).innerHTML=arr.map(x=>
-      `<div class="ipa-card" onclick="speak('${x.w}', 0.7)"><div class="ipa-symbol">${x.s}</div><div class="ipa-word">${x.w} <button class="speak-btn" title="Listen" onclick="event.stopPropagation();speak('${x.w}', 0.7)">&#128264;</button></div><div class="ipa-desc">${x.d}</div>${x.vn?`<div class="ipa-vn">🇻🇳 ${x.vn}</div>`:''}</div>`
+      `<div class="ipa-card">
+        <div class="ipa-symbol">${x.s} <button class="speak-btn" title="Hear the sound" onclick="event.stopPropagation();speak('${x.p}', 0.5)" style="font-size:0.9rem;width:26px;height:26px;vertical-align:middle;">&#128263;</button></div>
+        <div class="ipa-word">${x.w} <button class="speak-btn" title="Hear the word" onclick="event.stopPropagation();speak('${x.w}', 0.7)">&#128264;</button></div>
+        <div class="ipa-desc">${x.d}</div>${x.vn?`<div class="ipa-vn">🇻🇳 ${x.vn}</div>`:''}
+      </div>`
     ).join('');
   };
   render('ipaShortVowels',ipaData.shortVowels);

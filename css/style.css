@@ -106,7 +106,7 @@ main { max-width: 1200px; margin: 0 auto; padding: 24px 20px; }
 }
 .speak-btn:hover { background: var(--accent); transform: scale(1.1); }
 .speak-btn:active { transform: scale(0.95); }
-.ipa-card { cursor: pointer; }
+.ipa-card { cursor: default; }
 .ipa-section-label { font-size: 1.1rem; font-weight: 600; margin: 20px 0 12px; color: var(--primary-dark); }
 .minimal-pairs { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
 .mp-card { display: flex; gap: 16px; align-items: center; }
