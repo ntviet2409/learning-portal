@@ -604,9 +604,9 @@ function renderNotes(filterTag) {
         </div>
         <div class="note-text" style="${n.resolved ? 'text-decoration:line-through;' : ''}">${n.text.replace(/</g,'&lt;').replace(/>/g,'&gt;')}</div>
         ${n.section ? `<div class="note-section-ref">Section: ${n.section}</div>` : ''}
-        <div style="margin-top:4px;display:flex;gap:8px;">
+        <div class="note-actions">
           <button class="btn btn-sm" style="font-size:0.7rem;padding:2px 8px;" onclick="toggleNoteResolved(${n.id})">${n.resolved ? 'Reopen' : 'Resolve'}</button>
-          <button class="note-delete" onclick="if(confirm('Delete this note?'))deleteNote(${n.id})">&#128465;</button>
+          <button class="note-delete" onclick="if(confirm('Delete this note?'))deleteNote(${n.id})" title="Delete">&#128465;</button>
         </div>
       </div>`;
     });
