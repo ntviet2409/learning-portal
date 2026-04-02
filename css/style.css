@@ -498,10 +498,11 @@ main { max-width: 1200px; margin: 0 auto; padding: 24px 20px; }
 .notes-panel-footer { padding: 12px 18px; border-top: 1px solid var(--border); flex-shrink: 0; }
 .note-input-row { display: flex; gap: 8px; }
 .note-input {
-  flex: 1; padding: 8px 12px; border: 1px solid var(--border); border-radius: var(--radius);
-  font-size: 0.9rem; background: var(--bg); color: var(--text); resize: none;
-  font-family: var(--font); outline: none; min-height: 38px; max-height: 100px;
+  flex: 1; padding: 10px 12px; border: 1px solid var(--border); border-radius: var(--radius);
+  font-size: 0.9rem; background: var(--bg); color: var(--text); resize: vertical;
+  font-family: var(--font); outline: none; min-height: 70px; max-height: 160px;
 }
+.note-input-row { display: flex; gap: 8px; align-items: flex-end; }
 .note-input:focus { border-color: var(--primary); }
 .note-tag-select {
   padding: 6px 10px; border: 1px solid var(--border); border-radius: var(--radius);
