@@ -437,6 +437,96 @@ function showQuizResult(){
 function closeModal(){document.getElementById('modalOverlay').classList.remove('show');}
 document.getElementById('modalOverlay').addEventListener('click',function(e){if(e.target===this)closeModal();});
 
+// ===== EXPORT / IMPORT =====
+function exportProgress() {
+  const data = {
+    version: 1,
+    exportedAt: new Date().toISOString(),
+    learnedWords: JSON.parse(localStorage.getItem('learnedWords') || '{}'),
+    dailyLearning: JSON.parse(localStorage.getItem('dailyLearning') || '{}'),
+    dailyTarget: localStorage.getItem('dailyTarget') || '10',
+    theme: localStorage.getItem('theme') || 'light',
+    gettingStartedDismissed: localStorage.getItem('gettingStartedDismissed') || 'false'
+  };
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'english-hub-progress-' + getTodayKey() + '.json';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+function importProgress(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      const data = JSON.parse(e.target.result);
+      if (!data.learnedWords) throw new Error('Invalid file format');
+
+      // Merge or replace — ask user
+      const existingCount = Object.keys(learnedWords).length;
+      let doMerge = false;
+      if (existingCount > 0) {
+        doMerge = confirm(
+          'You have ' + existingCount + ' learned words.\n\n' +
+          'OK = Merge (keep both)\n' +
+          'Cancel = Replace (overwrite with file)'
+        );
+      }
+
+      if (doMerge) {
+        // Merge learned words
+        const imported = data.learnedWords || {};
+        Object.keys(imported).forEach(w => { learnedWords[w] = true; });
+        // Merge daily data
+        const currentDaily = getDailyData();
+        const importedDaily = data.dailyLearning || {};
+        Object.keys(importedDaily).forEach(day => {
+          if (!currentDaily[day]) currentDaily[day] = [];
+          importedDaily[day].forEach(w => {
+            if (!currentDaily[day].includes(w)) currentDaily[day].push(w);
+          });
+        });
+        saveDailyData(currentDaily);
+      } else {
+        // Replace
+        learnedWords = data.learnedWords || {};
+        if (data.dailyLearning) saveDailyData(data.dailyLearning);
+      }
+
+      localStorage.setItem('learnedWords', JSON.stringify(learnedWords));
+      if (data.dailyTarget) localStorage.setItem('dailyTarget', data.dailyTarget);
+      if (data.theme) {
+        localStorage.setItem('theme', data.theme);
+        document.body.classList.toggle('dark', data.theme === 'dark');
+        document.getElementById('themeToggle').textContent = data.theme === 'dark' ? 'Light' : 'Dark';
+      }
+      if (data.gettingStartedDismissed) {
+        localStorage.setItem('gettingStartedDismissed', data.gettingStartedDismissed);
+      }
+
+      // Re-render everything
+      renderVocabStats();
+      renderTopicChips();
+      renderVocab();
+      renderDashboard();
+
+      const totalImported = Object.keys(learnedWords).length;
+      alert('Imported successfully! ' + totalImported + ' words marked as learned.');
+    } catch (err) {
+      alert('Error importing file: ' + err.message + '\n\nMake sure you selected a valid English Hub progress file.');
+    }
+  };
+  reader.readAsText(file);
+  // Reset input so same file can be re-imported
+  event.target.value = '';
+}
+
 // Active nav highlight
 window.addEventListener('scroll',function(){
   const sections=['dashboard','ipa','vocabulary','grammar'];

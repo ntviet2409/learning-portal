@@ -54,6 +54,9 @@
   <div style="margin-top:12px;">
     <button class="btn btn-primary btn-sm daily-words-btn" onclick="showTodaysWords()">Today's Words</button>
     <button class="btn btn-sm" onclick="resetDailyProgress()" style="margin-left:6px;">Reset Today</button>
+    <button class="btn btn-sm" onclick="exportProgress()" style="margin-left:6px;">Export Progress</button>
+    <button class="btn btn-sm" onclick="document.getElementById('importFile').click()" style="margin-left:6px;">Import Progress</button>
+    <input type="file" id="importFile" accept=".json" onchange="importProgress(event)" style="display:none;">
   </div>
   <div style="margin-top:16px;">
     <div style="font-size:0.85rem;font-weight:600;color:var(--text-secondary);margin-bottom:6px;">Last 30 days activity:</div>
