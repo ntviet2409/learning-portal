@@ -13,8 +13,10 @@
   <div class="nav-links">
     <a href="#dashboard" onclick="scrollToSection('dashboard')">Dashboard</a>
     <a href="#ipa" onclick="scrollToSection('ipa')">IPA</a>
+    <a href="#mistakes" onclick="scrollToSection('mistakes')">Common Mistakes</a>
     <a href="#vocabulary" onclick="scrollToSection('vocabulary')">Vocabulary</a>
     <a href="#grammar" onclick="scrollToSection('grammar')">Grammar</a>
+    <a href="#chatgpt" onclick="scrollToSection('chatgpt')">ChatGPT Guide</a>
   </div>
   <div class="nav-actions">
     <button class="btn btn-sm" id="themeToggle" onclick="toggleTheme()">Dark</button>
@@ -24,8 +26,10 @@
 <div class="mobile-nav" id="mobileNav">
   <a href="#dashboard" onclick="scrollToSection('dashboard');toggleMobileMenu()">Dashboard</a>
   <a href="#ipa" onclick="scrollToSection('ipa');toggleMobileMenu()">IPA Pronunciation</a>
+  <a href="#mistakes" onclick="scrollToSection('mistakes');toggleMobileMenu()">Common Mistakes</a>
   <a href="#vocabulary" onclick="scrollToSection('vocabulary');toggleMobileMenu()">Vocabulary</a>
   <a href="#grammar" onclick="scrollToSection('grammar');toggleMobileMenu()">Grammar</a>
+  <a href="#chatgpt" onclick="scrollToSection('chatgpt');toggleMobileMenu()">ChatGPT Guide</a>
 </div>
 
 <main>
@@ -66,16 +70,29 @@
 
 <!-- GETTING STARTED -->
 <div class="getting-started" id="gettingStarted">
-  <h3>Welcome! Here's how to get started:</h3>
-  <p class="welcome-msg">This app is designed for Vietnamese learners. It has everything you need: pronunciation guide (IPA), 1000 essential words, and grammar with Vietnamese explanations. Follow this learning path for the best results:</p>
+  <h3>Chào mừng! Welcome! Here's how to get started:</h3>
+  <p class="welcome-msg">This app is designed specifically for Vietnamese learners (Người Việt học tiếng Anh). It has everything you need: pronunciation guide with Vietnamese comparisons, 1000 essential words with translations, and grammar with Vietnamese explanations.</p>
+
+  <div style="background:var(--accent);border:1px solid var(--border);border-radius:8px;padding:14px 16px;margin:12px 0;">
+    <strong style="color:var(--primary);">Daily Study Plan (Kế hoạch học mỗi ngày)</strong>
+    <p style="font-size:0.9rem;color:var(--text-secondary);margin-top:6px;">Research shows short daily sessions work best. Try 2-3 blocks of 15-20 minutes:</p>
+    <ul style="padding-left:20px;margin:8px 0;font-size:0.88rem;color:var(--text-secondary);">
+      <li><strong>Morning (Sáng) — 15 min:</strong> Learn 5 new words + review 5 old words using flashcards</li>
+      <li><strong>Afternoon (Chiều) — 15 min:</strong> Read one grammar section, practice making sentences</li>
+      <li><strong>Evening (Tối) — 10 min:</strong> Take the quiz, listen to pronunciation of today's words</li>
+    </ul>
+    <p style="font-size:0.85rem;color:var(--text-secondary);font-style:italic;">Consistency beats intensity! 15 minutes every day > 2 hours on Sunday. (Học đều đặn mỗi ngày quan trọng hơn học dồn!)</p>
+  </div>
+
   <ol>
-    <li><strong>Start with IPA Pronunciation</strong> — Learn the sound symbols first. Click the speaker icons to hear each sound. This helps you read pronunciation for every word.</li>
-    <li><strong>Set your daily target</strong> — Start with 10 words/day above. Learn 5 new words + review 5 old ones. Consistency beats speed!</li>
-    <li><strong>Learn vocabulary by topic</strong> — Start with "Greetings", then "Numbers". Click "Today's Words" for your daily dose. Mark words as "Learned" when you're confident.</li>
-    <li><strong>Test yourself</strong> — Use Flashcards to review, then Quiz to test. Aim for 80%+ before moving to the next topic.</li>
-    <li><strong>Study grammar alongside</strong> — After learning 50-100 words, start reading the grammar section. The Vietnamese translations will help you understand the English tenses.</li>
+    <li><strong>Start with IPA Pronunciation (Bắt đầu với phát âm)</strong> — Learn the sound symbols first. Pay special attention to sounds that don't exist in Vietnamese: /θ/ (think), /ð/ (this), ending consonants. Click speaker icons to hear each sound.</li>
+    <li><strong>Set your daily target (Đặt mục tiêu mỗi ngày)</strong> — Start with 10 words/day. Use the "Today's Words" button for a mix of new + review words.</li>
+    <li><strong>Learn vocabulary by topic (Học từ vựng theo chủ đề)</strong> — Start with "Greetings", then "Numbers". Mark words as "Learned" when you can pronounce them AND know the meaning.</li>
+    <li><strong>Test yourself (Tự kiểm tra)</strong> — Use Flashcards to review, then Quiz to test. Aim for 80%+ before moving to the next topic.</li>
+    <li><strong>Study grammar alongside (Học ngữ pháp song song)</strong> — After 50-100 words, start the grammar section. Vietnamese translations explain each tense.</li>
+    <li><strong>Use ChatGPT to practice (Dùng ChatGPT để luyện tập)</strong> — See the "ChatGPT Practice Guide" section below for ready-to-use prompts!</li>
   </ol>
-  <button class="dismiss-btn" onclick="dismissGettingStarted()">Got it, don't show this again</button>
+  <button class="dismiss-btn" onclick="dismissGettingStarted()">Got it, don't show this again (Đã hiểu, không hiển thị lại)</button>
 </div>
 
 <!-- IPA SECTION -->
@@ -106,6 +123,101 @@
 <div class="minimal-pairs" id="minimalPairs"></div>
 </div>
 
+<!-- VIETNAMESE COMMON MISTAKES -->
+<div class="section" id="mistakes">
+<h2 class="section-title">Common Mistakes for Vietnamese Learners</h2>
+<p class="section-subtitle">Những lỗi phổ biến của người Việt khi học tiếng Anh — and how to fix them!</p>
+
+<div class="card" style="margin-bottom:16px;">
+  <h3 style="color:var(--primary);font-size:1.05rem;margin-bottom:12px;">1. Dropping Ending Consonants (Nuốt phụ âm cuối)</h3>
+  <div class="vietnamese-box">
+    <p>Vietnamese words don't end with consonant sounds, so Vietnamese learners often skip them in English. This is the #1 mistake!</p>
+    <p><strong>Tiếng Việt không có phụ âm cuối, nên người Việt hay "nuốt" âm cuối khi nói tiếng Anh.</strong></p>
+  </div>
+  <div class="mistake-box">
+    <span class="incorrect">nigh</span> → <span class="correct">night /naɪ<strong>t</strong>/</span> — Don't drop the /t/!<br>
+    <span class="incorrect">rai</span> → <span class="correct">right /raɪ<strong>t</strong>/</span> — The /t/ at the end matters!<br>
+    <span class="incorrect">mou</span> → <span class="correct">mouse /maʊ<strong>s</strong>/</span> — The /s/ changes the meaning!<br>
+    <span class="incorrect">mana</span> → <span class="correct">manage /ˈmæn.ɪ<strong>dʒ</strong>/</span> — Pronounce the /dʒ/ ending!
+  </div>
+  <div class="tip-box">
+    <div class="tip-title">💡 Practice Tip</div>
+    <p>Exaggerate ending sounds when practicing. Say "night-TUH", "mouse-SUH" at first, then gradually soften. The ending should be short but audible.</p>
+    <p style="color:var(--text-secondary);font-style:italic;margin-top:4px;">Mẹo: Phóng đại âm cuối khi luyện tập. Nói "night-TỪ" trước, rồi dần dần nhẹ đi.</p>
+  </div>
+</div>
+
+<div class="card" style="margin-bottom:16px;">
+  <h3 style="color:var(--primary);font-size:1.05rem;margin-bottom:12px;">2. Confusing /l/ and /r/ (Nhầm lẫn âm /l/ và /r/)</h3>
+  <div class="vietnamese-box">
+    <p>Vietnamese /l/ and /r/ are very different from English. Vietnamese speakers often say /n/ instead of /l/, and /z/ instead of /r/.</p>
+    <p><strong>/l/ tiếng Anh: đầu lưỡi chạm lợi trên, giữ nguyên. /r/ tiếng Anh: uốn lưỡi ra sau, KHÔNG chạm đâu cả.</strong></p>
+  </div>
+  <div class="mistake-box">
+    <span class="incorrect">"rice" sounds like "lice"</span> → Practice: /r/ = curl tongue back, /l/ = tongue tip touches ridge<br>
+    <span class="incorrect">"right" sounds like "light"</span> → These are DIFFERENT words with DIFFERENT meanings!<br>
+    <span class="incorrect">"never" → "nevơ"</span> → <span class="correct">Say: /ˈnev.ə<strong>r</strong>/</span> — keep the /r/ even in the middle!
+  </div>
+  <div class="tip-box">
+    <div class="tip-title">💡 Practice Tip</div>
+    <p>For /r/: pretend you're a dog growling "rrrr" — your tongue should NOT touch anything. For /l/: your tongue tip firmly touches the ridge behind your upper teeth.</p>
+  </div>
+</div>
+
+<div class="card" style="margin-bottom:16px;">
+  <h3 style="color:var(--primary);font-size:1.05rem;margin-bottom:12px;">3. The /θ/ and /ð/ Sounds (Âm "th" — không có trong tiếng Việt!)</h3>
+  <div class="vietnamese-box">
+    <p>These two sounds don't exist in Vietnamese at all! Vietnamese speakers replace /θ/ with /t/ and /ð/ with /d/ or /z/.</p>
+    <p><strong>Cách phát âm: Đặt đầu lưỡi giữa hai hàm răng, thổi hơi qua. /θ/ = không rung, /ð/ = rung dây thanh.</strong></p>
+  </div>
+  <div class="mistake-box">
+    <span class="incorrect">"think" → "tink"</span> → <span class="correct">/θɪŋk/ — tongue between teeth!</span><br>
+    <span class="incorrect">"this" → "dis"</span> → <span class="correct">/ðɪs/ — tongue between teeth + voice!</span><br>
+    <span class="incorrect">"three" → "tree"</span> → <span class="correct">/θriː/ — "three" ≠ "tree"!</span><br>
+    <span class="incorrect">"weather" → "wedder"</span> → <span class="correct">/ˈweð.ər/ — tongue between teeth!</span>
+  </div>
+  <div class="tip-box">
+    <div class="tip-title">💡 Practice Tip</div>
+    <p>Put your finger in front of your mouth. Say "think" — you should feel air on your finger through the gap between tongue and teeth. If you don't feel air, your tongue isn't far enough forward.</p>
+  </div>
+</div>
+
+<div class="card" style="margin-bottom:16px;">
+  <h3 style="color:var(--primary);font-size:1.05rem;margin-bottom:12px;">4. Dropping "to be" (Quên động từ "to be")</h3>
+  <div class="vietnamese-box">
+    <p>In Vietnamese, you say "Nó đói" (He hungry). In English, you MUST include "is/am/are": "He <strong>is</strong> hungry."</p>
+    <p><strong>Tiếng Việt không cần "là" trước tính từ, nhưng tiếng Anh BẮT BUỘC phải có "is/am/are".</strong></p>
+  </div>
+  <div class="mistake-box">
+    <span class="incorrect">She beautiful.</span> → <span class="correct">She <strong>is</strong> beautiful.</span><br>
+    <span class="incorrect">I hungry.</span> → <span class="correct">I <strong>am</strong> hungry.</span><br>
+    <span class="incorrect">They happy.</span> → <span class="correct">They <strong>are</strong> happy.</span><br>
+    <span class="incorrect">The food delicious.</span> → <span class="correct">The food <strong>is</strong> delicious.</span>
+  </div>
+  <div class="tip-box">
+    <div class="tip-title">💡 Practice Tip</div>
+    <p>Rule: Subject + <strong>is/am/are</strong> + adjective. ALWAYS. No exceptions. When you describe something/someone, ask yourself: "Did I include is/am/are?"</p>
+  </div>
+</div>
+
+<div class="card" style="margin-bottom:16px;">
+  <h3 style="color:var(--primary);font-size:1.05rem;margin-bottom:12px;">5. Wrong Word Stress & Flat Intonation (Sai trọng âm & nói đều đều)</h3>
+  <div class="vietnamese-box">
+    <p>Vietnamese is tonal (each syllable has a tone), but English uses <strong>word stress</strong> (one syllable is louder/longer). Vietnamese speakers often make every syllable equal, which sounds robotic.</p>
+    <p><strong>Tiếng Anh nhấn mạnh MỘT âm tiết trong từ. Ví dụ: baNAna (nhấn "na" giữa), COMputer (nhấn "com").</strong></p>
+  </div>
+  <div class="mistake-box">
+    <span class="incorrect">com-PU-ter (all equal)</span> → <span class="correct">com-<strong>PU</strong>-ter (stress the middle)</span><br>
+    <span class="incorrect">ba-na-na (all equal)</span> → <span class="correct">ba-<strong>NA</strong>-na (stress the second)</span><br>
+    <span class="incorrect">im-por-tant (all equal)</span> → <span class="correct">im-<strong>POR</strong>-tant (stress the middle)</span>
+  </div>
+  <div class="tip-box">
+    <div class="tip-title">💡 Practice Tip</div>
+    <p>When learning a new word, always learn WHERE the stress falls. Clap your hands on the stressed syllable. Wrong stress can make you completely misunderstood!</p>
+  </div>
+</div>
+</div>
+
 <!-- VOCABULARY SECTION -->
 <div class="section" id="vocabulary">
 <h2 class="section-title">Vocabulary &mdash; 1000 Essential Words</h2>
@@ -127,6 +239,120 @@
 <h2 class="section-title">Grammar &mdash; Essential Tenses &amp; Rules</h2>
 <p class="section-subtitle">Master the building blocks of English grammar.</p>
 <div id="grammarContent"></div>
+</div>
+
+<!-- CHATGPT GUIDE -->
+<div class="section" id="chatgpt">
+<h2 class="section-title">ChatGPT Practice Guide</h2>
+<p class="section-subtitle">Use ChatGPT as your free English tutor — here are ready-to-use prompts for each stage of learning. (Dùng ChatGPT như gia sư miễn phí!)</p>
+
+<div class="card" style="margin-bottom:16px;">
+  <h3 style="color:var(--primary);font-size:1.05rem;margin-bottom:8px;">📌 When to Use This Site vs ChatGPT</h3>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px;">
+    <div style="background:var(--accent);border-radius:8px;padding:12px;">
+      <strong style="color:var(--primary);">Use This Site For:</strong>
+      <ul style="padding-left:16px;margin-top:6px;font-size:0.88rem;color:var(--text-secondary);">
+        <li>Learning IPA pronunciation</li>
+        <li>Building your first 1000 words</li>
+        <li>Understanding grammar rules</li>
+        <li>Daily target tracking</li>
+        <li>Flashcards & quizzes</li>
+        <li>Vietnamese explanations</li>
+      </ul>
+    </div>
+    <div style="background:var(--accent);border-radius:8px;padding:12px;">
+      <strong style="color:var(--success);">Use ChatGPT For:</strong>
+      <ul style="padding-left:16px;margin-top:6px;font-size:0.88rem;color:var(--text-secondary);">
+        <li>Practicing conversations</li>
+        <li>Getting sentence corrections</li>
+        <li>Asking "why" questions</li>
+        <li>Role-play scenarios</li>
+        <li>Writing practice</li>
+        <li>Hearing pronunciation (voice mode)</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="card" style="margin-bottom:16px;">
+  <h3 style="color:var(--primary);font-size:1.05rem;margin-bottom:8px;">🟢 Stage 1: First 100 Words (Giai đoạn 1: 100 từ đầu tiên)</h3>
+  <p style="font-size:0.88rem;color:var(--text-secondary);margin-bottom:12px;">Use these prompts AFTER learning words on this site. Copy and paste into ChatGPT:</p>
+
+  <div class="formula-box" style="position:relative;">
+    <strong>Prompt 1 — Check my pronunciation understanding:</strong><br>
+    <code style="font-size:0.85rem;">I'm a Vietnamese beginner learning English. I just learned these words: [paste 5-10 words]. Can you make simple sentences using each word and explain the pronunciation that Vietnamese speakers usually get wrong? Please explain in both English and Vietnamese.</code>
+  </div>
+
+  <div class="formula-box" style="position:relative;">
+    <strong>Prompt 2 — Simple conversation practice:</strong><br>
+    <code style="font-size:0.85rem;">Act as a friendly English teacher for a Vietnamese beginner. Let's have a very simple conversation using only basic words (greetings, numbers, family). Use short sentences (max 5-6 words). After each of my replies, gently correct any mistakes and explain in Vietnamese why. Start the conversation by greeting me.</code>
+  </div>
+
+  <div class="formula-box" style="position:relative;">
+    <strong>Prompt 3 — Word connection game:</strong><br>
+    <code style="font-size:0.85rem;">Let's play a word game. I'll say an English word, and you tell me: 1) A simple sentence using it, 2) One word that is related to it, 3) The Vietnamese translation. Keep everything very simple for a beginner. Start with the word "hello".</code>
+  </div>
+</div>
+
+<div class="card" style="margin-bottom:16px;">
+  <h3 style="color:var(--primary);font-size:1.05rem;margin-bottom:8px;">🟡 Stage 2: 100-500 Words (Giai đoạn 2: Đã biết 100-500 từ)</h3>
+  <p style="font-size:0.88rem;color:var(--text-secondary);margin-bottom:12px;">Now you can have real conversations and practice grammar:</p>
+
+  <div class="formula-box" style="position:relative;">
+    <strong>Prompt 4 — Grammar practice:</strong><br>
+    <code style="font-size:0.85rem;">I'm a Vietnamese learner studying English grammar. Today I want to practice [Present Simple / Present Continuous / Past Simple]. Give me 5 fill-in-the-blank exercises, then check my answers. Explain mistakes in Vietnamese. Focus on mistakes that Vietnamese speakers commonly make (like forgetting "is/am/are" or dropping -s/-es).</code>
+  </div>
+
+  <div class="formula-box" style="position:relative;">
+    <strong>Prompt 5 — Daily life role-play:</strong><br>
+    <code style="font-size:0.85rem;">Let's role-play! You are a [waiter at a restaurant / hotel receptionist / shop assistant / doctor]. I am the customer/patient. Have a realistic conversation with me. Use simple English. After the conversation, list the new vocabulary I should learn and give me the Vietnamese translations.</code>
+  </div>
+
+  <div class="formula-box" style="position:relative;">
+    <strong>Prompt 6 — Fix my sentences:</strong><br>
+    <code style="font-size:0.85rem;">I'm going to write 5 sentences in English. Please: 1) Tell me if each sentence is correct or incorrect, 2) Fix any mistakes, 3) Explain WHY it's wrong in simple English and Vietnamese, 4) Give me a better way to say it. Here are my sentences: [write your sentences]</code>
+  </div>
+</div>
+
+<div class="card" style="margin-bottom:16px;">
+  <h3 style="color:var(--primary);font-size:1.05rem;margin-bottom:8px;">🔵 Stage 3: 500+ Words (Giai đoạn 3: Đã biết 500+ từ)</h3>
+  <p style="font-size:0.88rem;color:var(--text-secondary);margin-bottom:12px;">You're getting stronger! Practice more complex conversations:</p>
+
+  <div class="formula-box" style="position:relative;">
+    <strong>Prompt 7 — IT/Work English:</strong><br>
+    <code style="font-size:0.85rem;">I'm a Vietnamese person working in IT. Let's practice a work conversation in English. Simulate a [daily standup meeting / code review discussion / email to my manager about a deadline / Slack message to a teammate]. Use real IT vocabulary. After the practice, list key phrases I should memorize.</code>
+  </div>
+
+  <div class="formula-box" style="position:relative;">
+    <strong>Prompt 8 — Email writing:</strong><br>
+    <code style="font-size:0.85rem;">I need to write a professional email in English for this situation: [describe your situation in Vietnamese or English]. Please: 1) Write the email for me, 2) Explain the key phrases, 3) Give me a template I can reuse, 4) Show me common mistakes Vietnamese speakers make in emails.</code>
+  </div>
+
+  <div class="formula-box" style="position:relative;">
+    <strong>Prompt 9 — Debate & opinion practice:</strong><br>
+    <code style="font-size:0.85rem;">Let's practice expressing opinions in English. The topic is: [remote work / AI in education / living in the city vs countryside]. Ask me questions, let me answer, then help me express my ideas more naturally. Correct my grammar and suggest better vocabulary. Explain in Vietnamese when needed.</code>
+  </div>
+</div>
+
+<div class="card" style="margin-bottom:16px;">
+  <h3 style="color:var(--primary);font-size:1.05rem;margin-bottom:8px;">🎤 Bonus: Voice Practice with ChatGPT App</h3>
+  <div class="vietnamese-box">
+    <p><strong>ChatGPT mobile app has a voice mode!</strong> Tap the headphone icon to talk instead of type. This is the best way to practice speaking when you don't have an English-speaking friend.</p>
+    <p style="margin-top:6px;"><strong>Ứng dụng ChatGPT có chế độ nói chuyện bằng giọng nói!</strong> Nhấn biểu tượng tai nghe để nói thay vì gõ. Đây là cách tốt nhất để luyện nói khi bạn không có bạn nói tiếng Anh.</p>
+  </div>
+  <div class="formula-box">
+    <strong>Voice practice prompt:</strong><br>
+    <code style="font-size:0.85rem;">I'm a Vietnamese beginner. Let's have a slow, simple English conversation. Speak clearly and slowly. If I make a mistake, gently correct me and repeat the correct version. Let's talk about [my daily routine / my favorite food / my job].</code>
+  </div>
+  <div class="tip-box">
+    <div class="tip-title">💡 Important Tips (Mẹo quan trọng)</div>
+    <p><strong>1.</strong> Always tell ChatGPT you are Vietnamese — it will focus on Vietnamese-specific mistakes.</p>
+    <p><strong>2.</strong> Ask ChatGPT to explain in Vietnamese when you don't understand something.</p>
+    <p><strong>3.</strong> Don't just read ChatGPT's replies — say them out loud! (Đừng chỉ đọc thầm — hãy nói to lên!)</p>
+    <p><strong>4.</strong> Practice 10-15 minutes with ChatGPT AFTER studying on this site, not instead of it.</p>
+    <p><strong>5.</strong> Save conversations you found useful — you can review them later.</p>
+  </div>
+</div>
 </div>
 
 </main>

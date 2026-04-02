@@ -529,7 +529,7 @@ function importProgress(event) {
 
 // Active nav highlight
 window.addEventListener('scroll',function(){
-  const sections=['dashboard','ipa','vocabulary','grammar'];
+  const sections=['dashboard','ipa','mistakes','vocabulary','grammar','chatgpt'];
   let current='';
   sections.forEach(id=>{
     const el=document.getElementById(id);
