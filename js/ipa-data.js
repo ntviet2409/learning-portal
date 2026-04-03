@@ -89,15 +89,232 @@ if ('speechSynthesis' in window) {
   window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
 }
 
+// ===== VOICE RECORDING =====
+let currentRecorder = null;
+let currentRecordingKey = null;
+
+function getRecKey(symbol, word) {
+  return 'rec_' + symbol.replace(/[/]/g, '').replace(/[^a-zA-Z0-9]/g, '_') + '_' + word;
+}
+
+function getRecordings() {
+  const keys = [];
+  for (let i = 0; i < localStorage.length; i++) {
+    const k = localStorage.key(i);
+    if (k && k.startsWith('rec_')) keys.push(k);
+  }
+  return keys;
+}
+
+function startRecording(symbol, word) {
+  const key = getRecKey(symbol, word);
+  if (currentRecorder && currentRecorder.state === 'recording') {
+    stopRecording();
+    return;
+  }
+  navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
+    const recorder = new MediaRecorder(stream);
+    const chunks = [];
+    currentRecorder = recorder;
+    currentRecordingKey = key;
+    recorder.ondataavailable = e => chunks.push(e.data);
+    recorder.onstop = () => {
+      stream.getTracks().forEach(t => t.stop());
+      const blob = new Blob(chunks, { type: 'audio/webm' });
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        try {
+          localStorage.setItem(key, reader.result);
+        } catch (e) {
+          alert('Storage full! Delete some recordings to make space.');
+        }
+        currentRecorder = null;
+        currentRecordingKey = null;
+        renderIPA();
+        updateRecReviewBar();
+      };
+      reader.readAsDataURL(blob);
+    };
+    recorder.start();
+    renderIPA();
+    // Auto-stop after 5 seconds
+    setTimeout(() => {
+      if (recorder.state === 'recording') recorder.stop();
+    }, 5000);
+  }).catch(err => {
+    alert('Microphone access denied. Please allow microphone access to record your pronunciation.');
+  });
+}
+
+function stopRecording() {
+  if (currentRecorder && currentRecorder.state === 'recording') {
+    currentRecorder.stop();
+  }
+}
+
+function deleteRecording(symbol, word) {
+  const key = getRecKey(symbol, word);
+  localStorage.removeItem(key);
+  renderIPA();
+  updateRecReviewBar();
+  renderRecReviewPanel();
+}
+
+function playRecording(symbol, word) {
+  const key = getRecKey(symbol, word);
+  const data = localStorage.getItem(key);
+  if (data) {
+    const audio = new Audio(data);
+    audio.play();
+  }
+}
+
+function updateRecReviewBar() {
+  const recs = getRecordings();
+  const bar = document.getElementById('recReviewBar');
+  const countEl = document.getElementById('recCount');
+  if (recs.length > 0) {
+    bar.style.display = 'flex';
+    countEl.innerHTML = '<strong>' + recs.length + '</strong> recording' + (recs.length > 1 ? 's' : '') + ' saved';
+  } else {
+    bar.style.display = 'none';
+    document.getElementById('recReviewPanel').style.display = 'none';
+  }
+}
+
+function toggleRecReviewPanel() {
+  const panel = document.getElementById('recReviewPanel');
+  if (panel.style.display === 'none') {
+    panel.style.display = 'block';
+    renderRecReviewPanel();
+  } else {
+    panel.style.display = 'none';
+  }
+}
+
+function renderRecReviewPanel() {
+  const recs = getRecordings();
+  const grid = document.getElementById('recReviewGrid');
+  if (!recs.length) {
+    grid.innerHTML = '<p style="color:var(--text-secondary);padding:12px;">No recordings yet.</p>';
+    return;
+  }
+  // Find matching IPA data for each recording
+  const allSounds = [
+    ...ipaData.shortVowels, ...ipaData.longVowels, ...ipaData.diphthongs,
+    ...ipaData.voicelessCons, ...ipaData.voicedCons, ...ipaData.nasals
+  ];
+  grid.innerHTML = recs.map(key => {
+    const data = localStorage.getItem(key);
+    // Find matching sound
+    const match = allSounds.find(x => getRecKey(x.s, x.w) === key);
+    const symbol = match ? match.s : key.replace('rec_', '');
+    const word = match ? match.w : '';
+    return `<div class="rec-review-card">
+      <div class="rec-info">
+        <span class="rec-symbol">${symbol}</span>
+        <span class="rec-word">${word}</span>
+      </div>
+      <audio controls src="${data}"></audio>
+      <button class="rec-delete-btn" onclick="if(confirm('Delete this recording?')){localStorage.removeItem('${key}');updateRecReviewBar();renderRecReviewPanel();}" title="Delete">&#128465;</button>
+    </div>`;
+  }).join('');
+}
+
+function clearAllRecordings() {
+  if (!confirm('Delete ALL recordings? This cannot be undone.')) return;
+  getRecordings().forEach(k => localStorage.removeItem(k));
+  renderIPA();
+  updateRecReviewBar();
+  renderRecReviewPanel();
+}
+
+function exportRecordingsZip() {
+  const recs = getRecordings();
+  if (!recs.length) { alert('No recordings to export.'); return; }
+
+  // Find matching IPA data
+  const allSounds = [
+    ...ipaData.shortVowels, ...ipaData.longVowels, ...ipaData.diphthongs,
+    ...ipaData.voicelessCons, ...ipaData.voicedCons, ...ipaData.nasals
+  ];
+
+  // We'll create a simple combined file since we can't use JSZip without a dependency
+  // Instead, export each recording individually with a manifest
+  const manifest = [];
+  const downloads = [];
+
+  recs.forEach((key, i) => {
+    const data = localStorage.getItem(key);
+    const match = allSounds.find(x => getRecKey(x.s, x.w) === key);
+    const symbol = match ? match.s : key;
+    const word = match ? match.w : '';
+    const filename = (i + 1).toString().padStart(2, '0') + '-' + word + '.webm';
+    manifest.push({ filename, symbol, word });
+    downloads.push({ filename, data });
+  });
+
+  // Create manifest JSON
+  const manifestBlob = new Blob([JSON.stringify({
+    exportedAt: new Date().toISOString(),
+    totalRecordings: recs.length,
+    recordings: manifest
+  }, null, 2)], { type: 'application/json' });
+
+  // Download manifest
+  const mUrl = URL.createObjectURL(manifestBlob);
+  const mA = document.createElement('a');
+  mA.href = mUrl;
+  mA.download = 'recordings-manifest.json';
+  document.body.appendChild(mA);
+  mA.click();
+  document.body.removeChild(mA);
+  URL.revokeObjectURL(mUrl);
+
+  // Download each recording
+  let delay = 300;
+  downloads.forEach((dl, i) => {
+    setTimeout(() => {
+      // Convert base64 data URL to blob
+      const parts = dl.data.split(',');
+      const mime = parts[0].match(/:(.*?);/)[1];
+      const bstr = atob(parts[1]);
+      const arr = new Uint8Array(bstr.length);
+      for (let j = 0; j < bstr.length; j++) arr[j] = bstr.charCodeAt(j);
+      const blob = new Blob([arr], { type: mime });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = dl.filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }, delay * (i + 1));
+  });
+
+  alert('Exporting ' + downloads.length + ' recordings + manifest file.\nYour browser may ask to allow multiple downloads.');
+}
+
 function renderIPA(){
   const render=(id,arr)=>{
-    document.getElementById(id).innerHTML=arr.map(x=>
-      `<div class="ipa-card">
+    document.getElementById(id).innerHTML=arr.map(x=>{
+      const key = getRecKey(x.s, x.w);
+      const hasRec = !!localStorage.getItem(key);
+      const isRecording = currentRecorder && currentRecorder.state === 'recording' && currentRecordingKey === key;
+      return `<div class="ipa-card">
         <div class="ipa-symbol">${x.s} <button class="speak-btn" title="Hear the sound" onclick="event.stopPropagation();speak('${x.p}', 0.5)" style="font-size:0.9rem;width:26px;height:26px;vertical-align:middle;">&#128263;</button></div>
         <div class="ipa-word">${x.w} <button class="speak-btn" title="Hear the word" onclick="event.stopPropagation();speak('${x.w}', 0.7)">&#128264;</button></div>
         <div class="ipa-desc">${x.d}</div>${x.vn?`<div class="ipa-vn">🇻🇳 ${x.vn}</div>`:''}
-      </div>`
-    ).join('');
+        <div class="ipa-rec-row">
+          <button class="rec-btn ${isRecording ? 'recording' : ''} ${hasRec && !isRecording ? 'has-recording' : ''}" onclick="event.stopPropagation();${isRecording ? 'stopRecording()' : `startRecording('${x.s.replace(/'/g,"\\'")}','${x.w}')`}">
+            ${isRecording ? '<span class="rec-dot"></span> Stop' : (hasRec ? '&#9679; Re-record' : '&#9679; Record')}
+          </button>
+          ${hasRec ? `<button class="rec-btn has-recording" onclick="event.stopPropagation();playRecording('${x.s.replace(/'/g,"\\'")}','${x.w}')" title="Play your recording">&#9654; My voice</button>
+          <button class="rec-btn" onclick="event.stopPropagation();deleteRecording('${x.s.replace(/'/g,"\\'")}','${x.w}')" title="Delete recording">&#128465;</button>` : ''}
+        </div>
+      </div>`;
+    }).join('');
   };
   render('ipaShortVowels',ipaData.shortVowels);
   render('ipaLongVowels',ipaData.longVowels);
@@ -108,5 +325,6 @@ function renderIPA(){
   document.getElementById('minimalPairs').innerHTML=ipaData.minimalPairs.map(x=>
     `<div class="card mp-card"><div><strong>${x.a.split(' ')[0]}</strong> <button class="speak-btn" onclick="speak('${x.a.split(' ')[0]}', 0.7)">&#128264;</button><br><span class="ipa-desc">${x.a.split(' ').slice(1).join(' ')}</span></div><div class="mp-vs">vs</div><div><strong>${x.b.split(' ')[0]}</strong> <button class="speak-btn" onclick="speak('${x.b.split(' ')[0]}', 0.7)">&#128264;</button><br><span class="ipa-desc">${x.b.split(' ').slice(1).join(' ')}</span></div><div class="ipa-desc">${x.diff}</div></div>`
   ).join('');
+  updateRecReviewBar();
 }
 

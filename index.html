@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>English Learning Hub — Beginner's Complete Guide</title>
-<link rel="stylesheet" href="css/style.css?v=7">
+<link rel="stylesheet" href="css/style.css?v=8">
 </head>
 <body>
 
@@ -116,6 +116,18 @@
 <div class="section" id="ipa">
 <h2 class="section-title">IPA Pronunciation Guide</h2>
 <p class="section-subtitle">Learn the International Phonetic Alphabet to pronounce English words correctly.</p>
+
+<div class="rec-review-bar" id="recReviewBar" style="display:none;">
+  <div class="rec-count" id="recCount"></div>
+  <div style="display:flex;gap:6px;">
+    <button class="btn btn-sm" onclick="toggleRecReviewPanel()">Review All Recordings</button>
+    <button class="btn btn-sm btn-primary" onclick="exportRecordingsZip()">Export Recordings (ZIP)</button>
+    <button class="btn btn-sm" onclick="clearAllRecordings()">Clear All</button>
+  </div>
+</div>
+<div class="rec-review-panel" id="recReviewPanel" style="display:none;">
+  <div class="rec-review-grid" id="recReviewGrid"></div>
+</div>
 
 <div class="ipa-section-label">Short Vowels</div>
 <div class="ipa-grid" id="ipaShortVowels"></div>
@@ -418,9 +430,9 @@
 </div>
 
 
-<script src="js/ipa-data.js?v=7"></script>
-<script src="js/vocab-data.js?v=7"></script>
-<script src="js/grammar-data.js?v=7"></script>
-<script src="js/app.js?v=7"></script>
+<script src="js/ipa-data.js?v=8"></script>
+<script src="js/vocab-data.js?v=8"></script>
+<script src="js/grammar-data.js?v=8"></script>
+<script src="js/app.js?v=8"></script>
 </body>
 </html>

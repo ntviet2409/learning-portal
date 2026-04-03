@@ -538,3 +538,46 @@ main { max-width: 1200px; margin: 0 auto; padding: 24px 20px; }
   text-align: center; color: var(--text-secondary); padding: 40px 20px;
   font-size: 0.9rem;
 }
+/* Voice Recording */
+.ipa-rec-row { display: flex; gap: 4px; justify-content: center; margin-top: 6px; flex-wrap: wrap; }
+.rec-btn {
+  background: none; border: 1px solid var(--border); cursor: pointer;
+  border-radius: 4px; padding: 3px 7px; font-size: 0.7rem; color: var(--text-secondary);
+  transition: all 0.2s; display: inline-flex; align-items: center; gap: 3px;
+}
+.rec-btn:hover { border-color: var(--primary); color: var(--primary); }
+.rec-btn.recording { border-color: var(--danger); color: var(--danger); animation: pulse-rec 1s infinite; }
+.rec-btn.has-recording { border-color: var(--success); color: var(--success); }
+@keyframes pulse-rec { 0%,100% { opacity: 1; } 50% { opacity: 0.5; } }
+.rec-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--danger); display: inline-block; }
+.rec-playback { display: flex; align-items: center; gap: 4px; margin-top: 4px; justify-content: center; }
+.rec-playback audio { height: 28px; max-width: 140px; }
+/* Recording Review Panel */
+.rec-review-bar {
+  display: flex; gap: 8px; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; margin-bottom: 16px; padding: 12px 16px;
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
+}
+.rec-review-bar .rec-count { font-size: 0.85rem; color: var(--text-secondary); }
+.rec-review-bar .rec-count strong { color: var(--primary); }
+.rec-review-panel { margin-bottom: 24px; }
+.rec-review-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 10px;
+}
+.rec-review-card {
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 10px 14px; display: flex; align-items: center; gap: 10px;
+}
+.rec-review-card .rec-info { flex: 1; }
+.rec-review-card .rec-symbol { font-weight: 700; color: var(--primary); font-size: 1.1rem; }
+.rec-review-card .rec-word { font-size: 0.82rem; color: var(--text-secondary); }
+.rec-review-card audio { height: 28px; flex-shrink: 0; max-width: 150px; }
+.rec-review-card .rec-delete-btn {
+  background: none; border: none; color: var(--text-secondary); cursor: pointer; font-size: 0.85rem;
+}
+.rec-review-card .rec-delete-btn:hover { color: var(--danger); }
+@media (max-width: 480px) {
+  .rec-review-grid { grid-template-columns: 1fr; }
+  .rec-review-card audio { max-width: 120px; }
+  .rec-btn { padding: 2px 5px; font-size: 0.65rem; }
+}

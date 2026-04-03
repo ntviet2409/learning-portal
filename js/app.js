@@ -757,6 +757,7 @@ window.addEventListener('scroll',function(){
 
 // Init
 renderIPA();
+updateRecReviewBar();
 renderVocabStats();
 renderTopicChips();
 renderVocab();
