@@ -72,17 +72,36 @@ minimalPairs: [
 ]
 };
 
-function speak(text, rate=0.8) {
-  if ('speechSynthesis' in window) {
-    window.speechSynthesis.cancel();
-    const u = new SpeechSynthesisUtterance(text);
-    u.lang = 'en-US';
-    u.rate = rate;
-    const voices = window.speechSynthesis.getVoices();
-    const enVoice = voices.find(v => v.lang.startsWith('en'));
-    if (enVoice) u.voice = enVoice;
-    window.speechSynthesis.speak(u);
+// Google Cloud TTS Chirp3-HD audio → Web Speech API fallback
+let _currentAudio = null;
+function speak(text, rate) {
+  if (_currentAudio) { _currentAudio.pause(); _currentAudio = null; }
+  if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+  if (!text) return;
+
+  // Try Google TTS local audio
+  if (typeof AUDIO_MAP !== 'undefined' && AUDIO_MAP[text.toLowerCase()]) {
+    const url = 'audio/google/' + AUDIO_MAP[text.toLowerCase()] + '.mp3';
+    _currentAudio = new Audio(url);
+    if (rate) _currentAudio.playbackRate = rate;
+    _currentAudio.onerror = function() { speakBrowserTTS(text, rate); };
+    _currentAudio.play().catch(function() { speakBrowserTTS(text, rate); });
+    return;
   }
+
+  // Fallback: browser TTS
+  speakBrowserTTS(text, rate);
+}
+
+function speakBrowserTTS(text, rate) {
+  if (!('speechSynthesis' in window)) return;
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = 'en-US';
+  u.rate = rate || 0.8;
+  const voices = window.speechSynthesis.getVoices();
+  const enVoice = voices.find(v => v.lang.startsWith('en'));
+  if (enVoice) u.voice = enVoice;
+  window.speechSynthesis.speak(u);
 }
 if ('speechSynthesis' in window) {
   window.speechSynthesis.getVoices();

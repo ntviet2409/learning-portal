@@ -3,3 +3,9 @@
 *.swo
 *~
 gh-key.txt
+.env
+.env.local
+.env.*
+index 2.html
+*backup*
+*old*
