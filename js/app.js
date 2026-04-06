@@ -772,6 +772,7 @@ window.addEventListener('scroll',function(){
 
 // Init
 renderIPA();
+if(typeof renderExercises==='function') renderExercises();
 updateRecReviewBar();
 renderVocabStats();
 renderTopicChips();

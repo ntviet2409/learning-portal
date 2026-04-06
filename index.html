@@ -16,7 +16,7 @@
     <a href="#mistakes" onclick="scrollToSection('mistakes')">Common Mistakes</a>
     <a href="#vocabulary" onclick="scrollToSection('vocabulary')">Vocabulary</a>
     <a href="#grammar" onclick="scrollToSection('grammar')">Grammar</a>
-    <a href="#chatgpt" onclick="scrollToSection('chatgpt')">ChatGPT Guide</a>
+    <a href="#grammar" onclick="scrollToSection('grammar')">Grammar</a>
   </div>
   <div class="nav-actions">
     <button class="btn btn-sm" id="themeToggle" onclick="toggleTheme()">Dark</button>
@@ -29,7 +29,7 @@
   <a href="#mistakes" onclick="scrollToSection('mistakes');toggleMobileMenu()">Common Mistakes</a>
   <a href="#vocabulary" onclick="scrollToSection('vocabulary');toggleMobileMenu()">Vocabulary</a>
   <a href="#grammar" onclick="scrollToSection('grammar');toggleMobileMenu()">Grammar</a>
-  <a href="#chatgpt" onclick="scrollToSection('chatgpt');toggleMobileMenu()">ChatGPT Guide</a>
+  <a href="#grammar" onclick="scrollToSection('grammar');toggleMobileMenu()">Grammar</a>
 </div>
 
 <main>
@@ -299,120 +299,15 @@
   </div><!-- /section-body grammar -->
 </div>
 
-<!-- CHATGPT GUIDE -->
-<div class="section collapsible" id="chatgpt">
+<!-- Grammar Exercises -->
+<div class="section collapsible" id="exercises">
 <div class="section-toggle" onclick="toggleSection(this)">
-<h2 class="section-title">ChatGPT Practice Guide</h2>
+<h2 class="section-title">Grammar Exercises</h2>
 <span class="toggle-chevron">&#9660;</span>
 </div>
-<p class="section-subtitle">Use ChatGPT as your free English tutor — here are ready-to-use prompts for each stage of learning. (Dùng ChatGPT như gia sư miễn phí!)</p>
-
-<div class="card" style="margin-bottom:16px;">
-  <h3 style="color:var(--primary);font-size:1.05rem;margin-bottom:8px;">📌 When to Use This Site vs ChatGPT</h3>
-  <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(250px, 1fr));gap:12px;margin-top:8px;">
-    <div style="background:var(--accent);border-radius:8px;padding:12px;">
-      <strong style="color:var(--primary);">Use This Site For:</strong>
-      <ul style="padding-left:16px;margin-top:6px;font-size:0.88rem;color:var(--text-secondary);">
-        <li>Learning IPA pronunciation</li>
-        <li>Building your first 1000 words</li>
-        <li>Understanding grammar rules</li>
-        <li>Daily target tracking</li>
-        <li>Flashcards & quizzes</li>
-        <li>Vietnamese explanations</li>
-      </ul>
-    </div>
-    <div style="background:var(--accent);border-radius:8px;padding:12px;">
-      <strong style="color:var(--success);">Use ChatGPT For:</strong>
-      <ul style="padding-left:16px;margin-top:6px;font-size:0.88rem;color:var(--text-secondary);">
-        <li>Practicing conversations</li>
-        <li>Getting sentence corrections</li>
-        <li>Asking "why" questions</li>
-        <li>Role-play scenarios</li>
-        <li>Writing practice</li>
-        <li>Hearing pronunciation (voice mode)</li>
-      </ul>
-    </div>
-  </div>
-</div>
-
-<div class="card" style="margin-bottom:16px;">
-  <h3 style="color:var(--primary);font-size:1.05rem;margin-bottom:8px;">🟢 Stage 1: First 100 Words (Giai đoạn 1: 100 từ đầu tiên)</h3>
-  <p style="font-size:0.88rem;color:var(--text-secondary);margin-bottom:12px;">Use these prompts AFTER learning words on this site. Copy and paste into ChatGPT:</p>
-
-  <div class="formula-box" style="position:relative;">
-    <strong>Prompt 1 — Check my pronunciation understanding:</strong><br>
-    <code style="font-size:0.85rem;">I'm a Vietnamese beginner learning English. I just learned these words: [paste 5-10 words]. Can you make simple sentences using each word and explain the pronunciation that Vietnamese speakers usually get wrong? Please explain in both English and Vietnamese.</code>
-  </div>
-
-  <div class="formula-box" style="position:relative;">
-    <strong>Prompt 2 — Simple conversation practice:</strong><br>
-    <code style="font-size:0.85rem;">Act as a friendly English teacher for a Vietnamese beginner. Let's have a very simple conversation using only basic words (greetings, numbers, family). Use short sentences (max 5-6 words). After each of my replies, gently correct any mistakes and explain in Vietnamese why. Start the conversation by greeting me.</code>
-  </div>
-
-  <div class="formula-box" style="position:relative;">
-    <strong>Prompt 3 — Word connection game:</strong><br>
-    <code style="font-size:0.85rem;">Let's play a word game. I'll say an English word, and you tell me: 1) A simple sentence using it, 2) One word that is related to it, 3) The Vietnamese translation. Keep everything very simple for a beginner. Start with the word "hello".</code>
-  </div>
-</div>
-
-<div class="card" style="margin-bottom:16px;">
-  <h3 style="color:var(--primary);font-size:1.05rem;margin-bottom:8px;">🟡 Stage 2: 100-500 Words (Giai đoạn 2: Đã biết 100-500 từ)</h3>
-  <p style="font-size:0.88rem;color:var(--text-secondary);margin-bottom:12px;">Now you can have real conversations and practice grammar:</p>
-
-  <div class="formula-box" style="position:relative;">
-    <strong>Prompt 4 — Grammar practice:</strong><br>
-    <code style="font-size:0.85rem;">I'm a Vietnamese learner studying English grammar. Today I want to practice [Present Simple / Present Continuous / Past Simple]. Give me 5 fill-in-the-blank exercises, then check my answers. Explain mistakes in Vietnamese. Focus on mistakes that Vietnamese speakers commonly make (like forgetting "is/am/are" or dropping -s/-es).</code>
-  </div>
-
-  <div class="formula-box" style="position:relative;">
-    <strong>Prompt 5 — Daily life role-play:</strong><br>
-    <code style="font-size:0.85rem;">Let's role-play! You are a [waiter at a restaurant / hotel receptionist / shop assistant / doctor]. I am the customer/patient. Have a realistic conversation with me. Use simple English. After the conversation, list the new vocabulary I should learn and give me the Vietnamese translations.</code>
-  </div>
-
-  <div class="formula-box" style="position:relative;">
-    <strong>Prompt 6 — Fix my sentences:</strong><br>
-    <code style="font-size:0.85rem;">I'm going to write 5 sentences in English. Please: 1) Tell me if each sentence is correct or incorrect, 2) Fix any mistakes, 3) Explain WHY it's wrong in simple English and Vietnamese, 4) Give me a better way to say it. Here are my sentences: [write your sentences]</code>
-  </div>
-</div>
-
-<div class="card" style="margin-bottom:16px;">
-  <h3 style="color:var(--primary);font-size:1.05rem;margin-bottom:8px;">🔵 Stage 3: 500+ Words (Giai đoạn 3: Đã biết 500+ từ)</h3>
-  <p style="font-size:0.88rem;color:var(--text-secondary);margin-bottom:12px;">You're getting stronger! Practice more complex conversations:</p>
-
-  <div class="formula-box" style="position:relative;">
-    <strong>Prompt 7 — IT/Work English:</strong><br>
-    <code style="font-size:0.85rem;">I'm a Vietnamese person working in IT. Let's practice a work conversation in English. Simulate a [daily standup meeting / code review discussion / email to my manager about a deadline / Slack message to a teammate]. Use real IT vocabulary. After the practice, list key phrases I should memorize.</code>
-  </div>
-
-  <div class="formula-box" style="position:relative;">
-    <strong>Prompt 8 — Email writing:</strong><br>
-    <code style="font-size:0.85rem;">I need to write a professional email in English for this situation: [describe your situation in Vietnamese or English]. Please: 1) Write the email for me, 2) Explain the key phrases, 3) Give me a template I can reuse, 4) Show me common mistakes Vietnamese speakers make in emails.</code>
-  </div>
-
-  <div class="formula-box" style="position:relative;">
-    <strong>Prompt 9 — Debate & opinion practice:</strong><br>
-    <code style="font-size:0.85rem;">Let's practice expressing opinions in English. The topic is: [remote work / AI in education / living in the city vs countryside]. Ask me questions, let me answer, then help me express my ideas more naturally. Correct my grammar and suggest better vocabulary. Explain in Vietnamese when needed.</code>
-  </div>
-</div>
-
-<div class="card" style="margin-bottom:16px;">
-  <h3 style="color:var(--primary);font-size:1.05rem;margin-bottom:8px;">🎤 Bonus: Voice Practice with ChatGPT App</h3>
-  <div class="vietnamese-box">
-    <p><strong>ChatGPT mobile app has a voice mode!</strong> Tap the headphone icon to talk instead of type. This is the best way to practice speaking when you don't have an English-speaking friend.</p>
-    <p style="margin-top:6px;"><strong>Ứng dụng ChatGPT có chế độ nói chuyện bằng giọng nói!</strong> Nhấn biểu tượng tai nghe để nói thay vì gõ. Đây là cách tốt nhất để luyện nói khi bạn không có bạn nói tiếng Anh.</p>
-  </div>
-  <div class="formula-box">
-    <strong>Voice practice prompt:</strong><br>
-    <code style="font-size:0.85rem;">I'm a Vietnamese beginner. Let's have a slow, simple English conversation. Speak clearly and slowly. If I make a mistake, gently correct me and repeat the correct version. Let's talk about [my daily routine / my favorite food / my job].</code>
-  </div>
-  <div class="tip-box">
-    <div class="tip-title">💡 Important Tips (Mẹo quan trọng)</div>
-    <p><strong>1.</strong> Always tell ChatGPT you are Vietnamese — it will focus on Vietnamese-specific mistakes.</p>
-    <p><strong>2.</strong> Ask ChatGPT to explain in Vietnamese when you don't understand something.</p>
-    <p><strong>3.</strong> Don't just read ChatGPT's replies — say them out loud! (Đừng chỉ đọc thầm — hãy nói to lên!)</p>
-    <p><strong>4.</strong> Practice 10-15 minutes with ChatGPT AFTER studying on this site, not instead of it.</p>
-    <p><strong>5.</strong> Save conversations you found useful — you can review them later.</p>
-  </div>
+<p class="section-subtitle">Practice each tense with multiple-choice and fill-in exercises. Select a tense to start!</p>
+<div class="section-body">
+<div id="exerciseContent"></div>
 </div>
 </div>
 
@@ -466,6 +361,7 @@
 <script src="js/ipa-data.js?v=9"></script>
 <script src="js/vocab-data.js?v=8"></script>
 <script src="js/grammar-data.js?v=8"></script>
-<script src="js/app.js?v=8"></script>
+<script src="js/exercises-data.js?v=1"></script>
+<script src="js/app.js?v=9"></script>
 </body>
 </html>
