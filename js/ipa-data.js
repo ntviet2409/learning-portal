@@ -72,8 +72,32 @@ minimalPairs: [
 ]
 };
 
+// IPA symbol → audio file ID mapping (Google TTS SSML phoneme recordings)
+const IPA_AUDIO_IDS = {
+  '/ɪ/':'ipa_short_i', '/e/':'ipa_e', '/ae/':'ipa_ae', '/ʌ/':'ipa_uh',
+  '/ɒ/':'ipa_o', '/ʊ/':'ipa_u', '/ə/':'ipa_schwa',
+  '/iː/':'ipa_ii', '/ɑː/':'ipa_aa', '/ɔː/':'ipa_oo', '/uː/':'ipa_uu', '/ɜː/':'ipa_er',
+  '/eɪ/':'ipa_ei', '/aɪ/':'ipa_ai', '/ɔɪ/':'ipa_oi', '/aʊ/':'ipa_au', '/əʊ/':'ipa_ou',
+  '/ɪə/':'ipa_ia', '/eə/':'ipa_ea', '/ʊə/':'ipa_ua',
+  '/p/':'ipa_p', '/t/':'ipa_t', '/k/':'ipa_k', '/f/':'ipa_f', '/θ/':'ipa_th',
+  '/s/':'ipa_s', '/ʃ/':'ipa_sh', '/tʃ/':'ipa_ch', '/h/':'ipa_h',
+  '/b/':'ipa_b', '/d/':'ipa_d', '/ɡ/':'ipa_g', '/v/':'ipa_v', '/ð/':'ipa_dh',
+  '/z/':'ipa_z', '/ʒ/':'ipa_zh', '/dʒ/':'ipa_dj',
+  '/m/':'ipa_m', '/n/':'ipa_n', '/ŋ/':'ipa_ng', '/l/':'ipa_l', '/r/':'ipa_r',
+  '/w/':'ipa_w', '/j/':'ipa_y',
+};
+
 // Google Cloud TTS Chirp3-HD audio → Web Speech API fallback
 let _currentAudio = null;
+
+// Play IPA phoneme sound from Google TTS SSML recording
+function speakIPA(ipaId) {
+  if (_currentAudio) { _currentAudio.pause(); _currentAudio = null; }
+  if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+  if (!ipaId) return;
+  _currentAudio = new Audio('audio/google/' + ipaId + '.mp3');
+  _currentAudio.play().catch(function(){});
+}
 function speak(text, rate) {
   if (_currentAudio) { _currentAudio.pause(); _currentAudio = null; }
   if ('speechSynthesis' in window) window.speechSynthesis.cancel();
@@ -321,8 +345,9 @@ function renderIPA(){
       const key = getRecKey(x.s, x.w);
       const hasRec = !!localStorage.getItem(key);
       const isRecording = currentRecorder && currentRecorder.state === 'recording' && currentRecordingKey === key;
+      const ipaId = IPA_AUDIO_IDS[x.s] || '';
       return `<div class="ipa-card">
-        <div class="ipa-symbol">${x.s} <button class="speak-btn" title="Hear the sound" onclick="event.stopPropagation();speakBrowserTTS('${x.p}', 0.5)" style="font-size:0.9rem;width:26px;height:26px;vertical-align:middle;">&#128263;</button></div>
+        <div class="ipa-symbol">${x.s} <button class="speak-btn" title="Hear the sound" onclick="event.stopPropagation();speakIPA('${ipaId}')" style="font-size:0.9rem;width:26px;height:26px;vertical-align:middle;">&#128263;</button></div>
         <div class="ipa-word">${x.w} <button class="speak-btn" title="Hear the word" onclick="event.stopPropagation();speak('${x.w}', 0.7)">&#128264;</button></div>
         <div class="ipa-desc">${x.d}</div>${x.vn?`<div class="ipa-vn">🇻🇳 ${x.vn}</div>`:''}
         <div class="ipa-rec-row">
