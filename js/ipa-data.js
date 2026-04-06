@@ -321,9 +321,9 @@ function renderIPA(){
       const key = getRecKey(x.s, x.w);
       const hasRec = !!localStorage.getItem(key);
       const isRecording = currentRecorder && currentRecorder.state === 'recording' && currentRecordingKey === key;
-      return `<div class="ipa-card">
-        <div class="ipa-symbol">${x.s} <button class="speak-btn" title="Hear the sound" onclick="event.stopPropagation();speak('${x.p}', 0.5)" style="font-size:0.9rem;width:26px;height:26px;vertical-align:middle;">&#128263;</button></div>
-        <div class="ipa-word">${x.w} <button class="speak-btn" title="Hear the word" onclick="event.stopPropagation();speak('${x.w}', 0.7)">&#128264;</button></div>
+      return `<div class="ipa-card" onclick="speak('${x.w}', 0.7)" style="cursor:pointer;">
+        <div class="ipa-symbol">${x.s}</div>
+        <div class="ipa-word">${x.w} <span style="font-size:.7rem;color:var(--text-secondary);">click to hear</span></div>
         <div class="ipa-desc">${x.d}</div>${x.vn?`<div class="ipa-vn">🇻🇳 ${x.vn}</div>`:''}
         <div class="ipa-rec-row">
           <button class="rec-btn ${isRecording ? 'recording' : ''} ${hasRec && !isRecording ? 'has-recording' : ''}" onclick="event.stopPropagation();${isRecording ? 'stopRecording()' : `startRecording('${x.s.replace(/'/g,"\\'")}','${x.w}')`}">

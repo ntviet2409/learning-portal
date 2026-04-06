@@ -331,7 +331,15 @@ function toggleGrammar(i){
   h.classList.toggle('open'); b.classList.toggle('open');
 }
 function scrollToSection(id){
-  document.getElementById(id).scrollIntoView({behavior:'smooth'});
+  const el = document.getElementById(id);
+  if (!el) return;
+  if (el.classList.contains('collapsed')) el.classList.remove('collapsed');
+  el.scrollIntoView({behavior:'smooth'});
+}
+
+function toggleSection(toggleEl) {
+  const section = toggleEl.closest('.collapsible');
+  if (section) section.classList.toggle('collapsed');
 }
 
 // Theme

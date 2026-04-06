@@ -35,11 +35,15 @@
 <main>
 
 <!-- DAILY DASHBOARD -->
-<div class="dashboard" id="dashboard">
-  <div class="dashboard-header">
+<div class="dashboard collapsible" id="dashboard">
+  <div class="dashboard-header section-toggle" onclick="toggleSection(this)">
     <div class="dashboard-title">Daily Learning Dashboard</div>
-    <div class="dashboard-date" id="dashDate"></div>
+    <div style="display:flex;align-items:center;gap:8px;">
+      <div class="dashboard-date" id="dashDate"></div>
+      <span class="toggle-chevron">&#9660;</span>
+    </div>
   </div>
+  <div class="section-body">
   <div class="dashboard-grid" id="dashGrid"></div>
 
   <!-- Study Timer -->
@@ -83,6 +87,7 @@
     <div style="font-size:0.85rem;font-weight:600;color:var(--text-secondary);margin-bottom:6px;">Last 30 days activity:</div>
     <div class="heatmap" id="heatmap"></div>
   </div>
+  </div><!-- /section-body dashboard -->
 </div>
 
 <!-- GETTING STARTED -->
@@ -113,9 +118,13 @@
 </div>
 
 <!-- IPA SECTION -->
-<div class="section" id="ipa">
+<div class="section collapsible" id="ipa">
+<div class="section-toggle" onclick="toggleSection(this)">
 <h2 class="section-title">IPA Pronunciation Guide</h2>
+<span class="toggle-chevron">&#9660;</span>
+</div>
 <p class="section-subtitle">Learn the International Phonetic Alphabet to pronounce English words correctly.</p>
+<div class="section-body">
 
 <div class="rec-review-bar" id="recReviewBar" style="display:none;">
   <div class="rec-count" id="recCount"></div>
@@ -150,11 +159,15 @@
 <div class="ipa-section-label">Minimal Pairs</div>
 <p style="color:var(--text-secondary);font-size:0.9rem;margin-bottom:12px;">Words that differ by only one sound, helping you hear the difference.</p>
 <div class="minimal-pairs" id="minimalPairs"></div>
+</div><!-- /section-body ipa -->
 </div>
 
 <!-- VIETNAMESE COMMON MISTAKES -->
-<div class="section" id="mistakes">
+<div class="section collapsible" id="mistakes">
+<div class="section-toggle" onclick="toggleSection(this)">
 <h2 class="section-title">Common Mistakes for Vietnamese Learners</h2>
+<span class="toggle-chevron">&#9660;</span>
+</div>
 <p class="section-subtitle">Những lỗi phổ biến của người Việt khi học tiếng Anh — and how to fix them!</p>
 
 <div class="card" style="margin-bottom:16px;">
@@ -248,9 +261,13 @@
 </div>
 
 <!-- VOCABULARY SECTION -->
-<div class="section" id="vocabulary">
+<div class="section collapsible" id="vocabulary">
+<div class="section-toggle" onclick="toggleSection(this)">
 <h2 class="section-title">Vocabulary &mdash; 1000 Essential Words</h2>
+<span class="toggle-chevron">&#9660;</span>
+</div>
 <p class="section-subtitle">Learn the most important English words grouped by topic.</p>
+<div class="section-body">
 
 <div class="stats-bar" id="vocabStats"></div>
 
@@ -263,16 +280,29 @@
 <div id="vocabContent"></div>
 </div>
 
+  </div><!-- /section-body vocab -->
+</div>
+
 <!-- GRAMMAR SECTION -->
-<div class="section" id="grammar">
+<div class="section collapsible" id="grammar">
+<div class="section-toggle" onclick="toggleSection(this)">
 <h2 class="section-title">Grammar &mdash; Essential Tenses &amp; Rules</h2>
+<span class="toggle-chevron">&#9660;</span>
+</div>
 <p class="section-subtitle">Master the building blocks of English grammar.</p>
+<div class="section-body">
 <div id="grammarContent"></div>
 </div>
 
+  </div><!-- /section-body grammar -->
+</div>
+
 <!-- CHATGPT GUIDE -->
-<div class="section" id="chatgpt">
+<div class="section collapsible" id="chatgpt">
+<div class="section-toggle" onclick="toggleSection(this)">
 <h2 class="section-title">ChatGPT Practice Guide</h2>
+<span class="toggle-chevron">&#9660;</span>
+</div>
 <p class="section-subtitle">Use ChatGPT as your free English tutor — here are ready-to-use prompts for each stage of learning. (Dùng ChatGPT như gia sư miễn phí!)</p>
 
 <div class="card" style="margin-bottom:16px;">
