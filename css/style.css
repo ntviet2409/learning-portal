@@ -137,22 +137,29 @@ main { max-width: 1200px; margin: 0 auto; padding: 24px 20px; }
 .chip .chip-count { margin-left: 4px; opacity: 0.7; font-size: 0.75rem; }
 .progress-bar-container { height: 4px; background: var(--border); border-radius: 2px; margin-top: 8px; }
 .progress-bar-fill { height: 100%; background: var(--success); border-radius: 2px; transition: width 0.3s; }
-.vocab-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 12px; }
+.vocab-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+@media(max-width:900px) { .vocab-grid { grid-template-columns: repeat(2, 1fr); } }
+@media(max-width:550px) { .vocab-grid { grid-template-columns: 1fr; } }
 .word-card {
   background: var(--bg-card); border: 1px solid var(--border);
-  border-radius: var(--radius); padding: 14px; transition: all 0.2s;
-  position: relative;
+  border-radius: var(--radius); padding: 10px 12px; transition: all 0.2s;
+  position: relative; cursor: pointer;
 }
-.word-card:hover { box-shadow: var(--shadow-lg); }
+.word-card:hover { box-shadow: var(--shadow-lg); border-color: var(--primary); }
 .word-card.learned { border-left: 3px solid var(--success); }
-.word-head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 4px; }
-.word-term { font-size: 1.05rem; font-weight: 700; }
-.word-ipa { font-size: 0.85rem; color: var(--primary); font-family: var(--font-mono); }
-.word-pos { font-size: 0.75rem; color: var(--text-secondary); font-style: italic; margin-bottom: 4px; }
-.word-def { font-size: 0.88rem; margin-bottom: 6px; }
-.word-ex { font-size: 0.82rem; color: var(--text-secondary); font-style: italic; }
-.word-actions { display: flex; gap: 6px; margin-top: 8px; }
-.learn-btn { font-size: 0.75rem; }
+.word-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 2px; }
+.word-term { font-size: 0.95rem; font-weight: 700; }
+.word-ipa { font-size: 0.72rem; color: var(--primary); font-family: var(--font-mono); }
+.word-pos { font-size: 0.68rem; color: var(--text-secondary); font-style: italic; margin-bottom: 2px; }
+.word-def { font-size: 0.8rem; margin-bottom: 3px; line-height: 1.3; }
+.word-vn { font-size: 0.78rem; }
+.word-ex { font-size: 0.72rem; color: var(--text-secondary); font-style: italic; line-height: 1.3; }
+.word-extra { font-size: 0.72rem; color: var(--primary-dark); margin-top: 3px; line-height: 1.3; }
+.word-extra span { display: inline-block; padding: 1px 5px; background: var(--accent); border-radius: 4px; margin: 1px 2px; font-size: 0.68rem; }
+.word-bottom { display: flex; justify-content: space-between; align-items: center; margin-top: 4px; }
+.learn-dot { width: 18px; height: 18px; border-radius: 50%; border: 1.5px solid var(--border); font-size: 0.65rem; cursor: pointer; background: var(--bg-card); color: var(--text-secondary); display: flex; align-items: center; justify-content: center; transition: 0.2s; }
+.learn-dot:hover { border-color: var(--success); color: var(--success); }
+.learn-dot.learned-dot { background: var(--success); color: #fff; border-color: var(--success); }
 /* Grammar */
 .grammar-block { margin-bottom: 16px; }
 .grammar-header {
@@ -337,7 +344,7 @@ main { max-width: 1200px; margin: 0 auto; padding: 24px 20px; }
   .section-title { font-size: 1.5rem; }
   .dashboard-grid { grid-template-columns: repeat(2, 1fr); }
   .ipa-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
-  .vocab-grid { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+  .vocab-grid { grid-template-columns: repeat(2, 1fr); }
   .minimal-pairs { grid-template-columns: 1fr; }
   .formula-box { font-size: 0.82rem; overflow-x: auto; }
   .formula-box code { word-break: break-word; }
@@ -389,7 +396,7 @@ main { max-width: 1200px; margin: 0 auto; padding: 24px 20px; }
   .search-box { min-width: 100%; font-size: 16px; /* prevent iOS zoom */ }
   .topic-chips { gap: 4px; margin-bottom: 12px; }
   .chip { padding: 4px 10px; font-size: 0.72rem; }
-  .vocab-grid { grid-template-columns: 1fr; gap: 8px; }
+  .vocab-grid { grid-template-columns: 1fr; }
   .word-card { padding: 12px 10px; }
   .word-term { font-size: 0.95rem; }
   .word-ipa { font-size: 0.78rem; }

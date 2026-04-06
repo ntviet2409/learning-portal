@@ -287,13 +287,20 @@ function renderVocab(){
       <div class="vocab-grid">`;
     filtered.forEach(w=>{
       const isLearned=learnedWords[w.w];
-      html+=`<div class="word-card ${isLearned?'learned':''}">
-        <div class="word-head"><span class="word-term">${w.w} <button class="speak-btn" onclick="event.stopPropagation();speak('${w.w.replace(/'/g, "\\'")}')">\u0026#128264;</button></span><span class="word-ipa">${w.ipa}</span></div>
+      const wSafe=w.w.replace(/'/g,"\\'");
+      // Extra info: prepositions, irregular forms, word family
+      let extra='';
+      if(w.prep) extra+=`<span title="Preposition">${w.prep}</span> `;
+      if(w.irr) extra+=`<span title="Irregular forms">${w.irr}</span> `;
+      if(w.family) extra+=`<span title="Word family">${w.family}</span> `;
+      html+=`<div class="word-card ${isLearned?'learned':''}" onclick="speak('${wSafe}')">
+        <div class="word-head"><span class="word-term">${w.w}</span><span class="word-ipa">${w.ipa}</span></div>
         <div class="word-pos">${w.pos}</div>
         <div class="word-def">${w.def}</div>${w.vn?`<div class="word-vn">🇻🇳 ${w.vn}</div>`:''}
-        <div class="word-ex">"${w.ex}"</div>
-        <div class="word-actions">
-          <button class="btn btn-sm learn-btn ${isLearned?'btn-success':''}" onclick="toggleLearned('${w.w.replace(/'/g,"\\'")}')">${isLearned?'Learned':'Mark Learned'}</button>
+        ${extra?`<div class="word-extra">${extra}</div>`:''}
+        <div class="word-bottom">
+          <div class="word-ex">"${w.ex}"</div>
+          <span class="learn-dot ${isLearned?'learned-dot':''}" onclick="event.stopPropagation();toggleLearned('${wSafe}')">${isLearned?'✓':'○'}</span>
         </div>
       </div>`;
     });
